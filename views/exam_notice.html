@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admission Notices - Khirshin S.K High School</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/CSS/footer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"/>
+  <style>
+    /* Admission Notices section style */
+    .notice-section {
+      max-width: 70%;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border: 2px solid black;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .notice-section h2 {
+      text-align: center;
+      color: #34495e;
+      margin-bottom: 20px;
+    }
+
+    .notice-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      flex-wrap: wrap;
+    }
+
+    .notice-item:last-child {
+      border-bottom: none;
+    }
+
+    .notice-item a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .notice-item a:hover {
+      text-decoration: underline;
+    }
+
+    @media(max-width: 600px){
+      .notice-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .notice-item div {
+        margin-top: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/school-logo.png" alt="">
+      <p>Khirshin S.K High School</p>
+    </div>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">About Us ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="principal-message.html">Principal's Message</a></li>
+          <li><a href="history_of_school.html">History of Our School</a></li>
+          <li><a href="Teacher_list.html">Teacher List</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Notice Board ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="exam_notice.html">Exam Notice</a></li>
+          <li><a href="academic_notice.html">Academic Notice</a></li>
+          <li><a href="Admission-notice.html">Admission Notice</a></li>
+          <li><a href="Event_notice.html">Event Notice</a></li>
+           <li><a href="Result.html"> Result</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Student Affairs ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="#">School Uniform</a></li>
+          <li><a href="#">School Timing</a></li>
+          <li><a href="photo-galarry.html">Photo Gallery</a></li>
+          <li><a href="#">Awards</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Admission Notices Section -->
+  <section class="notice-section">
+
+    
+    <h2>Exam Notices</h2>
+    <div id="admissionNotices">
+      <!-- JS দিয়ে load হবে -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="row">
+      <div class="col">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="">Email: info@gstu.edu</a></li>
+          <li><a href="">Phone: +880 1234-567890</a></li>
+          <li><a href="">Address: Gazipur, Bangladesh</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="">Facebook</a></li>
+          <li><a href="">Twitter</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>About GSTU</h3>
+        <ul>
+          <li><a href="">Committed to providing world-class education and research facilities.</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p>&copy;<span id="year"></span> All Rights Reserved By GSTU</p>
+  </footer>
+
+  <script>
+    // Fetch admission notices from backend
+    async function loadAdmissionNotices() {
+      try {
+        const res = await fetch('/api/notices');
+        const data = await res.json();
+        const container = document.getElementById('admissionNotices');
+        container.innerHTML = '';
+
+        const admissionNotices = data.filter(n => n.category === 'exam');
+
+        if(admissionNotices.length === 0){
+          container.innerHTML = '<p>No admission notices available.</p>';
+          return;
+        }
+
+        admissionNotices.forEach(n => {
+          const div = document.createElement('div');
+          div.className = 'notice-item';
+          div.innerHTML = `
+            <span>${n.title}</span>
+            <div>
+              <a href="/uploads/${n.pdf_file}" target="_blank"><i class="fa fa-eye"></i> View</a>
+              <a href="/uploads/${n.pdf_file}" download><i class="fa fa-download"></i> Download</a>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      } catch(err) {
+        console.error(err);
+        document.getElementById('admissionNotices').innerHTML = '<p>Error loading notices.</p>';
+      }
+    }
+
+    loadAdmissionNotices();
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

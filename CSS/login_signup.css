@@ -1,0 +1,88 @@
+/* ---------------- Body & Section ---------------- */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #f0f2f5;
+}
+
+.admin-section {
+    background: #fff;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.admin-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* ---------------- Inputs & Password ---------------- */
+form input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.password-wrapper input {
+    width: 100%;
+    /* Eye icon space */
+}
+
+.toggle-password, .toggle-shared {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+}
+
+/* ---------------- Button ---------------- */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* ---------------- Message ---------------- */
+#msg {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.admin-section a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.admin-section a:hover {
+    text-decoration: underline;
+}

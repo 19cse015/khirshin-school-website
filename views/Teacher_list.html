@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My School</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/CSS/footer.css">
+  <!-- FontAwesome for icons -->
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-yH1oDFak6i0bszq+2Kc1YZFP9N6Zkq7c+JmZL49vZPJuDxRwRyQ4tGpZB3hD6Xc+RA6mQ0N+FZ8FbF69Fdu6TA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .teacher-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .teacher-card {
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      transition: transform 0.3s;
+    }
+
+    .teacher-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .teacher-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .teacher-card h3 {
+      margin: 10px 0 5px 0;
+    }
+
+    .teacher-card p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    @media (max-width: 600px) {
+      .teacher-card {
+        width: 90%;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/school-logo.png" alt="">
+      <p>Khirshin S.K High School</p>
+    </div>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#">About Us ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="principal-message.html">Principal's Message</a></li>
+          <li><a href="history_of_school.html">History of Our School</a></li>
+          <li><a href="Teacher_list.html">Teacher List</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Notice Board ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="exam_notice.html">Exam Notice</a></li>
+          <li><a href="academic_notice.html">Academic Notice</a></li>
+          <li><a href="Admission-notice.html">Admission Notice</a></li>
+          <li><a href="Event_notice.html">Event Notice</a></li>
+          <li><a href="Result.html"> Result</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Student Affairs ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="#">School Uniform</a></li>
+          <li><a href="#">School Timing</a></li>
+          <li><a href="photo-galarry.html">Photo Gallery</a></li>
+          <li><a href="#">Awards</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div class="teacher-container" id="teacherContainer">
+    <!-- JS populate করবে -->
+  </div>
+
+  <script>
+    fetch('/api/teachers')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('teacherContainer');
+        container.innerHTML = '';
+        data.forEach(teacher => {
+          container.innerHTML += `
+                <div class="teacher-card">
+                <img src="${teacher.photo ? '/uploads/' + teacher.photo : '/images/default-teacher.jpg'}" alt="${teacher.name}">
+                <h3>${teacher.name}</h3>
+                <p><strong>Email:</strong> ${teacher.email}</p>
+                <p><strong>Phone:</strong> ${teacher.phone}</p>
+                <p><strong>Subject:</strong> ${teacher.subject}</p>
+                </div>
+            `;
+        });
+      });
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <footer>
+    <div class="row">
+      <!-- Contact -->
+      <div class="col">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="">Email: info@gstu.edu</a></li>
+          <li><a href="">Phone: +880 1234-567890</a></li>
+          <li><a href="">Address: Gazipur, Bangladesh</a></li>
+        </ul>
+
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/courses.html">Courses</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="">Facebook</a></li>
+          <li><a href="">Twitter</a></li>
+          <li><a href="">LinkedIn</a></li>
+          <li><a href="">YouTube</a></li>
+
+
+        </ul>
+
+      </div>
+
+      <!-- About -->
+      <div class="col">
+        <h3>About GSTU</h3>
+        <ul>
+          <li><a href="">GSTU is committed to providing world-class education and research facilities to build the
+              future
+              leaders of tomorrow.</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <p>&copy;<span id="year"></span> All Rights Reserved By GSTU</p>
+  </footer>
+
+  <script src="/public/script.js"></script>
+
+</body>
+
+</html>

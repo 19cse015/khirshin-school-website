@@ -1,0 +1,95 @@
+/* General body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Section container */
+.admin-section {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.admin-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Heading */
+.admin-section h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+/* Input fields */
+.admin-section input[type="text"],
+.admin-section input[type="password"] {
+  width: 90%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.admin-section input[type="text"]:focus,
+.admin-section input[type="password"]:focus {
+  border-color: #007BFF;
+}
+
+/* Buttons */
+.admin-section button {
+  width: 95%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.admin-section button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+/* Message text */
+#msg {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #e74c3c;
+}
+
+/* Links */
+.admin-section p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.admin-section p a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.admin-section p a:hover {
+  color: #0056b3;
+}

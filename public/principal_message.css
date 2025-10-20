@@ -1,0 +1,117 @@
+/* ======================
+   Main Message Container
+========================= */
+.message-container {
+  width: 60%;
+  max-width: 900px;
+  background-color: #fff8e7; /* soft blanched almond tone */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin: 40px auto;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Hover animation for container */
+.message-container:hover {
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* ======================
+   Header / Image Section
+========================= */
+.head-section {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.head-section img {
+  margin-top: 25px;
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border: 3px solid #000;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.head-section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* ======================
+   Message Box Section
+========================= */
+.message-container .message {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  padding: 25px;
+  line-height: 1.8;
+  text-align: justify;
+  transition: 0.3s ease;
+}
+
+.message-container .message:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.1);
+}
+
+.message-container .message p {
+  margin: 10px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+/* ======================
+   Responsive Design
+========================= */
+
+/* Tablet (≤ 992px) */
+@media (max-width: 992px) {
+  .message-container {
+    width: 80%;
+    padding: 18px;
+  }
+
+  .head-section img {
+    width: 45%;
+  }
+
+  .message-container .message p {
+    font-size: 15px;
+  }
+}
+
+/* Mobile (≤ 600px) */
+@media (max-width: 600px) {
+  .message-container {
+    width: 90%;
+    padding: 15px;
+    border-width: 1px;
+  }
+
+  .head-section img {
+    width: 70%;
+    max-width: 200px;
+    margin-top: 15px;
+  }
+
+  .message-container .message {
+    padding: 18px;
+  }
+
+  .message-container .message p {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}

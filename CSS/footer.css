@@ -1,0 +1,122 @@
+
+
+footer {
+  width: 100%;
+  background: linear-gradient(to right, #00093e, #2d0b00);
+  padding: 50px 70px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 30px;
+  position: relative;
+  
+}
+
+/* Row setup */
+.row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content:flex-start;
+  margin-bottom: 30px;
+}
+
+/* Each column */
+.col {
+  flex-basis: 25%;
+  /* চারটা কলাম nicely ফিট হবে */
+  min-width: 200px;
+  
+}
+
+.col:nth-child(2),.col:nth-child(3)
+{
+    flex-basis: 15%;;
+}
+
+.col h3 {
+  position: relative; /* ::after কে position করানোর জন্য */
+  display: inline-block; /* underline টা শুধু টেক্সট এর নিচে থাকবে */
+  cursor: pointer;
+}
+
+.col h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff9800, #ff0000, #ff00ff, #2196f3, #4caf50);
+  background-size: 300% 100%;
+  transition: width 0.5s ease;
+}
+
+.col h3:hover::after {
+  width: 100%; /* hover করলে পুরো underline আসবে */
+  animation: gradient-move 1.5s linear infinite;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 40%;
+  }
+  100% {
+    background-position: 100% 40%;
+  }
+}
+
+
+/* Links inside footer */
+.col ul {
+  list-style: none;
+  padding: 0;
+  
+}
+
+.col ul li {
+  margin: 8px 0px;
+}
+
+.col ul li a {
+  color: #fff;
+  text-decoration: none;
+   transition: 0.3s;
+}
+
+.col ul li a:hover {
+  color: #0bc801;
+  padding-left: 5px;
+}
+
+
+
+/* Divider */
+footer hr {
+  border: 0;
+  height: 1px;
+  background: #555;
+  margin: 20px 0;
+}
+
+/* Bottom text */
+footer p {
+
+    
+  text-align: center;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .col {
+    flex-basis: 45%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .col {
+    flex-basis: 100%;
+  }
+}

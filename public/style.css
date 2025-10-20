@@ -1,0 +1,460 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+/* Navbar */
+.navbar {
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Navbar Logo */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  /* vertical alignment */
+  gap: 10px;
+  /* logo এবং text এর মধ্যে فاصله */
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.navbar .logo p {
+  text-align: center;
+  padding: 5px 10px;
+  background-color: black;
+  color: white;
+  border: 3px solid red;
+  border-radius: 8px;
+
+  /* Animation */
+  animation: border-color-change 5s linear infinite, zoomInOut 3s infinite;
+
+}
+
+/* Keyframes for animated border */
+@keyframes border-color-change {
+  0% {
+    border-color: red;
+  }
+
+  25% {
+    border-color: orange;
+  }
+
+  50% {
+    border-color: yellow;
+  }
+
+  75% {
+    border-color: green;
+  }
+
+  100% {
+    border-color: red;
+  }
+}
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  /* zoom in */
+  100% {
+    transform: scale(1);
+  }
+
+  /* zoom out */
+}
+
+
+.navbar .logo img {
+  width: 70px;
+  /* logo size adjust করুন */
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+  /* optional: চ্যাপ্টা কোণ দিতে */
+}
+
+/* Responsive for small screens */
+@media screen and (max-width: 768px) {
+  .navbar .logo {
+    font-size: 18px;
+  }
+
+  .navbar .logo img {
+    width: 40px;
+    height: 40px;
+    text-align: left;
+  }
+}
+
+
+
+
+
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.menu li a:hover {
+  color: cyan;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #33ffff,
+    0 0 5px #66ffff;
+  transform: translateY(-2px);
+}
+
+/* Dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  background: white;
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(71, 118, 91, 0.2);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  border-top: 6px solid greenyellow;
+
+  border-bottom: 2px solid cyan;
+
+  border-left: 2px solid cyan;
+  border-right: 2px solid cyan;
+
+  z-index: 100;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.dropdown-content li a {
+  color: #264653;
+  padding: 12px 16px;
+  text-decoration: none;
+  opacity: 1;
+  transition: 0.3s all ease;
+}
+
+.dropdown-content li a:hover {
+  background-color: black;
+  color: cyan;
+  border-radius: 5px;
+  opacity: 1;
+
+}
+
+
+.dropdown:hover .dropdown-content,
+.dropdown .dropdown-content:hover {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Notice Headline */
+.notice-headline {
+  background: #4F4AD3;
+  padding: 12px;
+  font-weight: bold;
+  color: red;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.notice-headline .text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 30s linear infinite;
+
+}
+
+.notice-headline .text:hover {
+  animation-play-state: paused;
+  font-size: 18px;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+    color: red;
+    /* শুরুতে লাল */
+  }
+
+  50% {
+    color: wheat;
+    /* মাঝখানে নীল */
+  }
+
+  100% {
+    transform: translateX(-100%);
+    color: yellow;
+    /* শেষে সবুজ */
+  }
+}
+
+
+
+
+/* Image Slider */
+/* Main Section Layout */
+.main-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1200px;
+  padding: 10px;
+}
+
+/* Left and Right Boxes */
+.left-box,
+.right-box {
+  width: 25%;
+  background: #f8f9fa;
+  margin: auto;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#motivation {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  font-style: italic;
+  transition: all 3s ease-in-out;
+  /* smooth change effect */
+}
+
+.left-box:hover {
+  background: white;
+  color: black;
+  /* hover হলে background পরিবর্তন হবে */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+}
+
+
+.left-box h2,
+.right-box h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: darkblue;
+}
+
+.right-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.right-box li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Slider in Middle */
+.slider {
+  width: 70%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.slides {
+  display: flex;
+  width: 400%;
+  animation: slide 12s infinite;
+}
+
+.slides img {
+  width: 25%;
+  height: 350px;
+  object-fit: cover;
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+
+  25% {
+    margin-left: -100%;
+  }
+
+  50% {
+    margin-left: -200%;
+  }
+
+  75% {
+    margin-left: -300%;
+  }
+
+  100% {
+    margin-left: 0;
+  }
+}
+
+
+
+
+
+
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+  
+  }
+
+  .navbar .logo {
+    margin-right: auto;
+    /* logo বামে আটকে থাকবে */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbar .logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .menu {
+    flex-direction: row;
+    /* row আকারে */
+    flex-wrap: nowrap;
+    /* নিচে নামতে দেবে না */
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .menu li {
+    flex: 1;
+    /* সব item সমান ভাগে জায়গা নেবে */
+    text-align: center;
+  }
+
+  .menu li a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /* Dropdown full width in mobile */
+  .dropdown-content {
+    position: absolute;
+    min-width: 100%;
+    /* dropdown পুরো width নেবে */
+    left: 0;
+    top: 100%;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .dropdown-content li a {
+    padding: 10px 15px;
+    text-align: left;
+  }
+}
+
+/* Left, Right & Slider Responsive */
+@media screen and (max-width: 768px) {
+  .main-section {
+    flex-direction: column;
+    /* column আকারে যাবে */
+    align-items: center;
+  }
+
+  .left-box,
+  .right-box,
+  .slider {
+    width: 100%;
+    /* full width নিবে */
+    margin-bottom: 20px;
+    /* নিচে gap থাকবে */
+  }
+
+  .slides img {
+    height: 200px;
+    /* ছোট স্ক্রিনে slider height ছোট */
+  }
+}
+
+/* আরও ছোট স্ক্রিন (mobile) এর জন্য */
+@media screen and (max-width: 480px) {
+  .slides img {
+    height: 160px;
+    /* খুব ছোট মোবাইলের জন্য height কম */
+  }
+
+  .left-box h2,
+  .right-box h2 {
+    font-size: 18px;
+    /* লেখা ছোট হবে */
+  }
+
+  #motivation {
+    font-size: 0.95rem;
+  }
+}

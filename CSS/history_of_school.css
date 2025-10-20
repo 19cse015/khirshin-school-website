@@ -1,0 +1,134 @@
+/* ---------- Section Styling ---------- */
+.history {
+  text-align: center;
+  margin: 40px auto;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+.history h2{
+   margin-top: 20px;
+   margin-bottom: 40px;
+}
+
+/* ---------- Dropdown Wrapper ---------- */
+.dropdown_image {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+/* ---------- Dropdown Content ---------- */
+.dropdown-content_image {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 260px;
+  padding: 12px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  z-index: 100;
+  text-align: center;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.dropdown_image:hover .dropdown-content_image {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ---------- Image Styling ---------- */
+.centered-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.centered-img:hover {
+  transform: scale(1.03);
+}
+
+/* ---------- Description Box Inside Dropdown ---------- */
+.desc {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px 12px;
+  margin-top: 10px;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.4;
+  transition: background 0.3s ease;
+}
+
+.desc:hover {
+  background-color: #1e1e1e;
+}
+
+/* ---------- Main Description Section ---------- */
+.description {
+  margin: 40px auto;
+  max-width: 900px;
+  padding: 20px;
+  text-align: justify;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* ---------- Animation ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+  .description {
+    margin: 20px;
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  .dropdown-content_image {
+    min-width: 220px;
+    top: 60px;
+  }
+
+  .desc {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .description {
+    margin: 15px;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .dropdown-content_image {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 55px;
+  }
+
+  .centered-img {
+    width: 100%;
+  }
+
+  .desc {
+    font-size: 12px;
+  }
+}

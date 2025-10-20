@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<link rel="stylesheet" href="../CSS/login_signup.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<section class="admin-section">
+  <h2>Admin Login</h2>
+
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required><br><br>
+
+    <!-- Password field with show/hide -->
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Password" required>
+      <span class="toggle-password"><i class="fa-solid fa-eye"></i></span>
+    </div><br><br>
+
+    <!-- Shared password field -->
+    <div class="password-wrapper">
+      <input type="password" id="sharedPassword" placeholder="Shared Password" required>
+      <span class="toggle-shared"><i class="fa-solid fa-eye"></i></span>
+    </div><br><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p id="msg"></p>
+  <p>Don't have an account? <a href="signup.html">Sign Up here</a></p>
+</section>
+
+<script>
+// Show/hide password
+const togglePassword = document.querySelector('.toggle-password');
+const passwordInput = document.getElementById('password');
+
+togglePassword.addEventListener('click', () => {
+    if(passwordInput.type === 'password'){
+        passwordInput.type = 'text';
+        togglePassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    } else {
+        passwordInput.type = 'password';
+        togglePassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+    }
+});
+
+// Show/hide shared password
+const toggleShared = document.querySelector('.toggle-shared');
+const sharedInput = document.getElementById('sharedPassword');
+
+toggleShared.addEventListener('click', () => {
+    if(sharedInput.type === 'password'){
+        sharedInput.type = 'text';
+        toggleShared.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    } else {
+        sharedInput.type = 'password';
+        toggleShared.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+    }
+});
+
+// Login fetch
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const sharedPassword = document.getElementById('sharedPassword').value.trim();
+
+  fetch('/admin/login', {
+    method:'POST',
+    headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify({ username, password, sharedPassword })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const msgEl = document.getElementById('msg');
+    msgEl.innerText = data.message;
+    msgEl.style.color = data.success ? "green" : "red";
+
+    if(data.success){
+      window.location.href = '/admin/home.html';
+    }
+  })
+  .catch(err => {
+    document.getElementById('msg').innerText = "Server error! Try again.";
+  });
+});
+</script>
+</body>
+</html>
