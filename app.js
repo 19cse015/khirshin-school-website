@@ -7,9 +7,6 @@ const multer = require('multer');
 const fs = require('fs');
 const PORT = process.env.PORT || 3002;
 
-app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
-
-
 const connectDB = require('./db');
 connectDB();
 
@@ -214,4 +211,4 @@ app.get('/api/teachers', async (req, res) => {
 app.get('/', (req, res) => res.redirect('/admin/login.html'));
 
 // ---------------- START SERVER ----------------
-app.listen(3002, () => console.log('Server running on http://localhost:3002'));
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
