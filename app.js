@@ -5,6 +5,10 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+const PORT = process.env.PORT || 3002;
+
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+
 
 const connectDB = require('./db');
 connectDB();
