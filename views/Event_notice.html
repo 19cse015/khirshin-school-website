@@ -4,16 +4,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My School</title>
+  <title>Admission Notices - Khirshin S.K High School</title>
   <link rel="stylesheet" href="/public/update.css">
   <link rel="stylesheet" href="/CSS/footer.css">
-  <!-- FontAwesome for icons -->
-  <!-- FontAwesome 6 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-yH1oDFak6i0bszq+2Kc1YZFP9N6Zkq7c+JmZL49vZPJuDxRwRyQ4tGpZB3hD6Xc+RA6mQ0N+FZ8FbF69Fdu6TA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" />
+  <style>
+    /* ===== Table Container ===== */
+    .table-container {
+      max-width: 90%;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+    }
+
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+    }
+
+    .table-container thead {
+      background: #007BFF;
+      color: #fff;
+    }
+
+    .table-container th,
+    .table-container td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .table-container tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .table-container tbody tr:hover {
+      background: #e3f2fd;
+      transition: background 0.3s;
+    }
+
+    .table-container a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .table-container a:hover {
+      text-decoration: underline;
+    }
 
 
+    /* ===== Responsive: Small screens ===== */
+    @media(max-width: 768px) {
+      .table-container {
+        overflow-x: auto;
+        /* horizontal scroll */
+      }
+
+      .table-container table {
+        min-width: 600px;
+        /* ensure table doesn't shrink too much */
+      }
+
+      /* Optional: adjust padding & font size for small screens */
+      .table-container th,
+      .table-container td {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -21,7 +86,7 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="/images/school-logo.png" alt="">
+      <img src="/images/logo-final.jpg" alt="">
       <p>Khirshin S.K High School</p>
     </div>
     <ul class="menu">
@@ -48,7 +113,7 @@
         <a href="#">Student Affairs ▾</a>
         <ul class="dropdown-content">
           <li><a href="#">School Uniform</a></li>
-          <li><a href="">School Timing</a></li>
+          <li><a href="#">School Timing</a></li>
           <li><a href="photo-galarry.html">Photo Gallery</a></li>
           <li><a href="#">Awards</a></li>
         </ul>
@@ -56,20 +121,31 @@
     </ul>
   </nav>
 
+  <!-- Admission Notices Section -->
+
+  <section class="notice-section">
+    <h2 style="text-align: center; margin-top: 20px;">Event Notices</h2>
+    <div class="table-container">
+      <table id="examNoticeTable">
+        <thead>
+          <tr>
+            <th>SL</th>
+            <th>Title</th>
+            <th>View</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS দিয়ে load হবে -->
+        </tbody>
+      </table>
+    </div>
+  </section>
 
 
-
-
-
-
-
-
-
-
-
+  <!-- Footer -->
   <footer>
     <div class="row">
-      <!-- Contact -->
       <div class="col">
         <h3>Contact Us</h3>
         <ul>
@@ -77,52 +153,72 @@
           <li><a href="">Phone: +880 1234-567890</a></li>
           <li><a href="">Address: Gazipur, Bangladesh</a></li>
         </ul>
-
       </div>
-
-      <!-- Quick Links -->
       <div class="col">
         <h3>Quick Links</h3>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/about.html">About Us</a></li>
-          <li><a href="/courses.html">Courses</a></li>
-          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </div>
-
-      <!-- Social Media -->
       <div class="col">
         <h3>Follow Us</h3>
         <ul>
           <li><a href="">Facebook</a></li>
           <li><a href="">Twitter</a></li>
-          <li><a href="">LinkedIn</a></li>
-          <li><a href="">YouTube</a></li>
-
-
         </ul>
-
       </div>
-
-      <!-- About -->
       <div class="col">
         <h3>About GSTU</h3>
         <ul>
-          <li><a href="">GSTU is committed to providing world-class education and research facilities to build the
-              future
-              leaders of tomorrow.</a></li>
+          <li><a href="">Committed to providing world-class education and research facilities.</a></li>
         </ul>
-
       </div>
     </div>
-
     <hr>
+    <p>&copy;<span id="year"></span> All Rights Reserved By <span style="font-size: medium;">Md.Arif Hossain</span></p>
 
-    <p>&copy;<span id="year"></span> All Rights Reserved By GSTU</p>
+    <script src="/public/year.js"></script>
   </footer>
 
-  <script src="/public/script.js"></script>
+  <script>
+    // Fetch admission notices from backend
+    async function loadAdmissionNotices() {
+      try {
+        const res = await fetch('/api/notices');
+        const data = await res.json();
+        const tbody = document.querySelector('#examNoticeTable tbody');
+        tbody.innerHTML = '';
+
+        const examNotices = data.filter(n => n.category === 'event');
+
+        if (examNotices.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No Event notices available.</td></tr>';
+          return;
+        }
+
+        examNotices.forEach((n, index) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+                <td data-label="SL">${index + 1}</td>
+                  <td data-label="Title">${n.title}</td>
+                  <td data-label="View"><a href="/uploads/${n.pdf_file}" target="_blank"><i class="fa fa-eye"></i> View</a></td>
+               <td data-label="Download"><a href="/uploads/${n.pdf_file}" download><i class="fa fa-download"></i> Download</a></td>
+               `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        console.error(err);
+        const tbody = document.querySelector('#examNoticeTable tbody');
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Error loading notices.</td></tr>';
+      }
+    }
+
+    loadAdmissionNotices();
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 

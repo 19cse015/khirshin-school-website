@@ -21,6 +21,12 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
+
+
 // ---------------- SESSION ----------------
 app.use(session({
     secret: 'secret123',
@@ -80,13 +86,14 @@ app.post('/admin/login', async (req, res) => {
     }
 });
 
-// Logout
 app.get('/admin/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) return res.send("Error logging out");
+        res.clearCookie('connect.sid'); // session cookie delete
         res.redirect('/admin/login.html');
     });
 });
+
 
 // ---------------- ADMIN PAGES ----------------
 app.get('/admin/login.html', (req, res) => res.sendFile(path.join(__dirname, 'ADMIN', 'login.html')));
@@ -205,6 +212,11 @@ app.get('/teachers', (req, res) => res.sendFile(path.join(__dirname, 'views', 'T
 app.get('/api/teachers', async (req, res) => {
     const teachers = await Teacher.find();
     res.json(teachers);
+});
+
+app.use((req,res)=>{
+    res.send('<h1>!404 Not Found </h1>')
+
 });
 
 // ---------------- ROOT ----------------

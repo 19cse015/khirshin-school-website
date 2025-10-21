@@ -1,143 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Teachers</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Teachers</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <link rel="stylesheet" href="/CSS/manage-teacher.css">
+  <meta http-equiv="Expires" content="0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
-  body { background: #f4f6f9; padding: 20px; color:#333; }
-
-  h2 { text-align:center; margin-bottom: 30px; font-size:28px; color:#2c3e50; }
-
-  /* Card Box */
-  .form-box {
-    max-width:500px; 
-    margin:20px auto; 
-    padding:25px; 
-    background:#fff; 
-    border-radius:12px; 
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  }
-  .form-box h3 { margin-bottom:15px; text-align:center; color:#007BFF; }
-
-  .form-box input {
-    width:100%; 
-    margin:10px 0; 
-    padding:12px; 
-    border:1px solid #ddd; 
-    border-radius:8px; 
-    font-size:15px;
-  }
-  .form-box button {
-    width:100%; 
-    padding:12px; 
-    background:#007BFF; 
-    color:white; 
-    border:none; 
-    border-radius:8px; 
-    font-size:16px;
-    font-weight:500;
-    cursor:pointer;
-    transition: all 0.3s;
-  }
-  .form-box button:hover { background:#0056b3; }
-
-  /* Table */
-  .table-container {
-    margin-top:30px;
-    overflow-x:auto;
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  table { width:100%; border-collapse: collapse; }
-  table thead { background:#007BFF; color:white; }
-  th, td { padding:12px; text-align:left; border-bottom:1px solid #eee; }
-  tr:hover { background:#f9f9f9; }
-
-  td[contenteditable="true"] {
-    background:#fdfdfd;
-    border-radius:6px;
-    padding:8px;
-  }
-
-  td img {
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    object-fit:cover;
-  }
-
-  /* Buttons */
-  td button {
-    margin-right:8px;
-    padding:6px 12px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:14px;
-    transition: 0.3s;
-  }
-  td button:first-child { background:#28a745; color:white; }
-  td button:first-child:hover { background:#218838; }
-  td button:last-child { background:#dc3545; color:white; }
-  td button:last-child:hover { background:#c82333; }
-
-  @media(max-width:600px){
-    h2{ font-size:22px; }
-    .form-box{ padding:15px; }
-    th,td{ font-size:14px; }
-  }
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
 </head>
+
 <body>
 
-<h2>Teacher Management</h2>
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li><a href="admin-home.html"><i class="fa fa-home"></i> Dashboard</a></li>
+      <li><a href="manage-teachers.html"><i class="fa fa-users"></i> Manage Teachers</a></li>
+      <li><a href="manage-notices.html"><i class="fa fa-bell"></i> Manage Notices</a></li>
+      <li><a href="manage-gallery.html"><i class="fa fa-image"></i> Manage Gallery</a></li>
+      <li><a href="manage-results.html"><i class="fa fa-graduation-cap"></i> Manage Results</a></li>
+      <li><a href="settings.html"><i class="fa fa-cog"></i> Settings</a></li>
+      <li><a href="login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
+    </ul>
+  </div>
 
-<div class="form-box">
-  <h3>Add Teacher</h3>
-  <input type="text" id="name" placeholder="Name" required>
-  <input type="email" id="email" placeholder="Email" required>
-  <input type="text" id="phone" placeholder="Phone" required>
-  <input type="text" id="subject" placeholder="Subject" required>
-  <input type="file" id="photo" accept="image/*" required>
-  <button id="addTeacherBtn">➕ Add Teacher</button>
-</div>
+  
 
-<div class="table-container">
-  <table id="teacherTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Photo</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Subject</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+  <div class="form-box">
+    <h3>Add Teacher</h3>
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="text" id="phone" placeholder="Phone" required>
+    <input type="text" id="subject" placeholder="Subject" required>
+    <input type="file" id="photo" accept="image/*" required>
+    <button id="addTeacherBtn">➕ Add Teacher</button>
+  </div>
 
-<script>
-const fetchTeachers = () => {
-  fetch('/admin/teachers')
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.querySelector('#teacherTable tbody');
-      tbody.innerHTML = '';
-      data.forEach(teacher => {
-        tbody.innerHTML += `
+  <div class="table-container">
+    <table id="teacherTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Subject</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const fetchTeachers = () => {
+      fetch('/admin/teachers')
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.querySelector('#teacherTable tbody');
+          tbody.innerHTML = '';
+          data.forEach(teacher => {
+            tbody.innerHTML += `
           <tr>
             <td>${teacher._id}</td>
             <td><img src="/uploads/${teacher.photo || 'default.png'}" alt="photo"></td>
@@ -151,64 +80,65 @@ const fetchTeachers = () => {
             </td>
           </tr>
         `;
-      });
+          });
+        });
+    };
+
+    document.getElementById('addTeacherBtn').addEventListener('click', () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const subject = document.getElementById('subject').value;
+      const photo = document.getElementById('photo').files[0];
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("subject", subject);
+      formData.append("photo", photo);
+
+      fetch('/admin/add-teacher', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message);
+          fetchTeachers();
+        });
     });
-};
 
-document.getElementById('addTeacherBtn').addEventListener('click', ()=>{
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const subject = document.getElementById('subject').value;
-  const photo = document.getElementById('photo').files[0];
+    function updateTeacher(id, btn) {
+      const row = btn.parentElement.parentElement;
+      const name = row.querySelector('.name').innerText;
+      const email = row.querySelector('.email').innerText;
+      const phone = row.querySelector('.phone').innerText;
+      const subject = row.querySelector('.subject').innerText;
 
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("phone", phone);
-  formData.append("subject", subject);
-  formData.append("photo", photo);
+      fetch('/admin/update-teacher/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, subject })
+      })
+        .then(res => res.json())
+        .then(data => alert(data.message));
+    }
 
-  fetch('/admin/add-teacher',{
-    method:'POST',
-    body: formData
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    alert(data.message);
+    function deleteTeacher(id) {
+      if (confirm('Are you sure?')) {
+        fetch('/admin/delete-teacher/' + id, { method: 'DELETE' })
+          .then(res => res.json())
+          .then(data => {
+            alert(data.message);
+            fetchTeachers();
+          });
+      }
+    }
+
+    // Initial fetch
     fetchTeachers();
-  });
-});
-
-function updateTeacher(id, btn){
-  const row = btn.parentElement.parentElement;
-  const name = row.querySelector('.name').innerText;
-  const email = row.querySelector('.email').innerText;
-  const phone = row.querySelector('.phone').innerText;
-  const subject = row.querySelector('.subject').innerText;
-
-  fetch('/admin/update-teacher/'+id, {
-    method:'PUT',
-    headers:{ 'Content-Type':'application/json' },
-    body: JSON.stringify({ name,email,phone,subject })
-  })
-  .then(res=>res.json())
-  .then(data=>alert(data.message));
-}
-
-function deleteTeacher(id){
-  if(confirm('Are you sure?')){
-    fetch('/admin/delete-teacher/'+id, { method:'DELETE' })
-      .then(res=>res.json())
-      .then(data=>{
-        alert(data.message);
-        fetchTeachers();
-      });
-  }
-}
-
-// Initial fetch
-fetchTeachers();
-</script>
+  </script>
 </body>
+
 </html>

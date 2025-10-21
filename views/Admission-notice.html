@@ -8,55 +8,74 @@
   <link rel="stylesheet" href="/public/update.css">
   <link rel="stylesheet" href="/CSS/footer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous"/>
+    crossorigin="anonymous" />
   <style>
-    /* Admission Notices section style */
-    .notice-section {
-      max-width: 900px;
-      margin: 40px auto;
+    /* ===== Table Container ===== */
+    .table-container {
+      max-width: 90%;
+      margin: 30px auto;
       background: #fff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
     }
 
-    .notice-section h2 {
-      text-align: center;
-      color: #34495e;
-      margin-bottom: 20px;
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
     }
 
-    .notice-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
+    .table-container thead {
+      background: #007BFF;
+      color: #fff;
+    }
+
+    .table-container th,
+    .table-container td {
+      padding: 12px 15px;
+      text-align: left;
       border-bottom: 1px solid #eee;
-      flex-wrap: wrap;
     }
 
-    .notice-item:last-child {
-      border-bottom: none;
+    .table-container tbody tr:nth-child(even) {
+      background: #f9f9f9;
     }
 
-    .notice-item a {
+    .table-container tbody tr:hover {
+      background: #e3f2fd;
+      transition: background 0.3s;
+    }
+
+    .table-container a {
       color: #3498db;
       text-decoration: none;
-      font-weight: 600;
-      margin-left: 10px;
+      font-weight: 500;
     }
 
-    .notice-item a:hover {
+    .table-container a:hover {
       text-decoration: underline;
     }
 
-    @media(max-width: 600px){
-      .notice-item {
-        flex-direction: column;
-        align-items: flex-start;
+
+    /* ===== Responsive: Small screens ===== */
+    @media(max-width: 768px) {
+      .table-container {
+        overflow-x: auto;
+        /* horizontal scroll */
       }
-      .notice-item div {
-        margin-top: 5px;
+
+      .table-container table {
+        min-width: 600px;
+        /* ensure table doesn't shrink too much */
+      }
+
+      /* Optional: adjust padding & font size for small screens */
+      .table-container th,
+      .table-container td {
+        padding: 10px;
+        font-size: 14px;
       }
     }
   </style>
@@ -67,7 +86,7 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="/images/school-logo.png" alt="">
+      <img src="/images/logo-final.jpg" alt="">
       <p>Khirshin S.K High School</p>
     </div>
     <ul class="menu">
@@ -87,7 +106,7 @@
           <li><a href="academic_notice.html">Academic Notice</a></li>
           <li><a href="Admission-notice.html">Admission Notice</a></li>
           <li><a href="Event_notice.html">Event Notice</a></li>
-           <li><a href="Result.html"> Result</a></li>
+          <li><a href="Result.html"> Result</a></li>
         </ul>
       </li>
       <li class="dropdown">
@@ -103,12 +122,26 @@
   </nav>
 
   <!-- Admission Notices Section -->
+
   <section class="notice-section">
-    <h2>Admission Notices</h2>
-    <div id="admissionNotices">
-      <!-- JS দিয়ে load হবে -->
+    <h2 style="text-align: center; margin-top: 20px;">Admission Notices</h2>
+    <div class="table-container">
+      <table id="examNoticeTable">
+        <thead>
+          <tr>
+            <th>SL</th>
+            <th>Title</th>
+            <th>View</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS দিয়ে load হবে -->
+        </tbody>
+      </table>
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer>
@@ -143,7 +176,9 @@
       </div>
     </div>
     <hr>
-    <p>&copy;<span id="year"></span> All Rights Reserved By GSTU</p>
+    <p>&copy;<span id="year"></span> All Rights Reserved By <span style="font-size: medium;">Md.Arif Hossain</span></p>
+
+    <script src="/public/year.js"></script>
   </footer>
 
   <script>
@@ -152,37 +187,39 @@
       try {
         const res = await fetch('/api/notices');
         const data = await res.json();
-        const container = document.getElementById('admissionNotices');
-        container.innerHTML = '';
+        const tbody = document.querySelector('#examNoticeTable tbody');
+        tbody.innerHTML = '';
 
-        const admissionNotices = data.filter(n => n.category === 'admission');
+        const examNotices = data.filter(n => n.category === 'admission');
 
-        if(admissionNotices.length === 0){
-          container.innerHTML = '<p>No admission notices available.</p>';
+        if (examNotices.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No Admission notices available.</td></tr>';
           return;
         }
 
-        admissionNotices.forEach(n => {
-          const div = document.createElement('div');
-          div.className = 'notice-item';
-          div.innerHTML = `
-            <span>${n.title}</span>
-            <div>
-              <a href="/uploads/${n.pdf_file}" target="_blank"><i class="fa fa-eye"></i> View</a>
-              <a href="/uploads/${n.pdf_file}" download><i class="fa fa-download"></i> Download</a>
-            </div>
-          `;
-          container.appendChild(div);
+        examNotices.forEach((n, index) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+                <td data-label="SL">${index + 1}</td>
+                  <td data-label="Title">${n.title}</td>
+                  <td data-label="View"><a href="/uploads/${n.pdf_file}" target="_blank"><i class="fa fa-eye"></i> View</a></td>
+               <td data-label="Download"><a href="/uploads/${n.pdf_file}" download><i class="fa fa-download"></i> Download</a></td>
+               `;
+          tbody.appendChild(tr);
         });
-      } catch(err) {
+
+      } catch (err) {
         console.error(err);
-        document.getElementById('admissionNotices').innerHTML = '<p>Error loading notices.</p>';
+        const tbody = document.querySelector('#examNoticeTable tbody');
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Error loading notices.</td></tr>';
       }
     }
 
     loadAdmissionNotices();
+
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
 </body>
+
 </html>

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My School - Photo Gallery</title>
-    <link rel="stylesheet" href="/public/update.css">
     <link rel="stylesheet" href="/CSS/footer.css">
+    <link rel="stylesheet" href="/public/update.css">
     <!-- FontAwesome 6 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-yH1oDFak6i0bszq+2Kc1YZFP9N6Zkq7c+JmZL49vZPJuDxRwRyQ4tGpZB3hD6Xc+RA6mQ0N+FZ8FbF69Fdu6TA=="
@@ -16,7 +16,6 @@
         /* Gallery Section */
         .gallery-section {
             padding: 50px 20px;
-            background: #f9f9f9;
             text-align: center;
         }
 
@@ -26,16 +25,17 @@
             color: #333;
         }
 
+        /* Grid container */
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             max-width: 1200px;
             width: 100%;
-           
             margin: 0 auto;
         }
 
+        /* Card styles */
         .gallery-card {
             background: #fff;
             border-radius: 12px;
@@ -43,11 +43,10 @@
             overflow: hidden;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 1 / 1;
-           
             display: flex;
             align-items: center;
             justify-content: center;
+            aspect-ratio: 1 / 1;
         }
 
         .gallery-card:hover {
@@ -59,27 +58,44 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            
             transition: transform 0.4s ease;
         }
 
         .gallery-card:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
-
-
-
-
-
-        .gallery-card .card-body {
-            padding: 15px;
+        /* ===== Responsive ===== */
+        @media (max-width: 992px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
         }
 
-        .gallery-card .card-body h3 {
-            font-size: 18px;
-            margin: 0;
-            color: #444;
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .gallery-section h2 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .gallery-section h2 {
+                font-size: 20px;
+            }
+
+            .gallery-card {
+                aspect-ratio: auto;
+                /* small screen এ flexible height */
+            }
         }
     </style>
 </head>
@@ -88,7 +104,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="/images/school-logo.png" alt="">
+            <img src="/images/logo-final.jpg" alt="">
             <p>Khirshin S.K High School</p>
         </div>
         <ul class="menu">
@@ -108,7 +124,7 @@
                     <li><a href="academic_notice.html">Academic Notice</a></li>
                     <li><a href="Admission-notice.html">Admission Notice</a></li>
                     <li><a href="Event_notice.html">Event Notice</a></li>
-                    <li><a href="Result.html"> Result</a></li>
+                    <li><a href="Result.html">Result</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -123,11 +139,11 @@
         </ul>
     </nav>
 
-    <!-- ===== Gallery Section ===== -->
+    <!-- Gallery Section -->
     <section class="gallery-section">
         <h2>Our School Gallery</h2>
         <div class="gallery-container" id="galleryContainer">
-            <!-- JS দিয়ে auto load হবে -->
+            <!-- JS দিয়ে auto load হবে -->
         </div>
     </section>
 
@@ -167,8 +183,7 @@
                 <h3>About GSTU</h3>
                 <ul>
                     <li><a href="">GSTU is committed to providing world-class education and research facilities to build
-                            the
-                            future leaders of tomorrow.</a></li>
+                            the future leaders of tomorrow.</a></li>
                 </ul>
             </div>
         </div>
@@ -185,13 +200,15 @@
                 container.innerHTML = "";
                 data.forEach(item => {
                     container.innerHTML += `
-            <div class="gallery-card">
-              <img src="/uploads/${item.filename}" alt="${item.title}">
-              
-            </div>
-          `;
+                        <div class="gallery-card">
+                          <img src="/uploads/${item.filename}" alt="${item.title}">
+                        </div>
+                    `;
                 });
             });
+
+        // Current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 
