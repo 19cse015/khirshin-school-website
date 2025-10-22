@@ -41,6 +41,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/css', express.static(path.join(__dirname, 'CSS')));
 app.use('/', express.static(path.join(__dirname, 'views')));
 
+
+app.get('/', (req, res) => res.redirect('/admin/login.html'));
+
 // ---------------- MULTER CONFIG ----------------
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'uploads/'),
@@ -220,7 +223,7 @@ app.use((req,res)=>{
 });
 
 // ---------------- ROOT ----------------
-app.get('/', (req, res) => res.redirect('/admin/login.html'));
+
 
 // ---------------- START SERVER ----------------
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
