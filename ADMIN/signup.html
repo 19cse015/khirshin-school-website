@@ -1,69 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Admin Sign Up</title>
- <link rel="stylesheet" href="../CSS/login_signup.css">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up Request</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .breadcrumb-bar {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: left;
+      padding: 12px 25px;
+      font-size: 16px;
+      z-index: 5;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb-bar ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .breadcrumb-bar a {
+      color: #00aaff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb-bar a:hover {
+      color: #66d9ff;
+      text-decoration: underline;
+    }
+
+
+    /*  Background Container for Smooth Slideshow */
+    .bg-slideshow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .bg-slideshow img.active {
+      opacity: 1;
+    }
+
+    /*  Form Box */
+    .form-box {
+      background: rgba(255, 255, 255, 0.754);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      padding: 40px 30px;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: black;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.443);
+      color: #222;
+      transition: box-shadow 0.3s ease;
+    }
+
+    input:focus {
+      box-shadow: 0 0 8px #007bff;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #444;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #007bff, #00d4ff);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }
+
+    #msg {
+      margin-top: 15px;
+      font-weight: 600;
+      text-align: center;
+      color: #fff;
+      min-height: 24px;
+    }
+
+    @media (max-width: 480px) {
+      .form-box { padding: 30px 20px; }
+    }
+  </style>
 </head>
 <body>
-<section class="admin-section">
-  <h2>Admin Sign Up</h2>
-  <form id="signupForm">
-    <input type="text" id="username" placeholder="Username" required>
 
-    <div class="password-wrapper">
-      <input type="password" id="password" placeholder="Password" required>
-      <span class="toggle-password"><i class="fa-solid fa-eye-slash"></i></i></span>
-    </div>
+ <div class="breadcrumb-bar">
+    <ul>
+      <li><i class="fa-solid fa-house"></i> <a href="/index.html">Home</a></li>
+      <li>&gt;&gt;</li>
+      <li>Login</li>
+    </ul>
+  </div>
+  <!-- Background Slideshow -->
+  <div class="bg-slideshow">
+    <img src="/images/security.jpg" class="active" alt="Background 1">
+    <img src="/images/security2.jpg" alt="Background 2">
+    <img src="/images/security3.jpg" alt="Background 3">
+    <img src="/images/security5.jpg" alt="Background 4">
+  </div>
 
-    <button type="submit">Sign Up</button>
-  </form>
-  <p id="msg"></p>
-  <p>Already have an account? <a href="login.html">Login here</a></p>
-</section>
+  <div class="form-box">
+    <h2>Request Sign Up</h2>
+    <form id="signupForm">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Username" required />
+      </div>
 
-<script>
-// Show/hide password
-const togglePassword = document.querySelector('.toggle-password');
-const passwordInput = document.getElementById('password');
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required />
+        <span class="toggle-password"><i class="fa-solid fa-eye-slash"></i></span>
+      </div>
 
-togglePassword.addEventListener('click', () => {
-    if(passwordInput.type === 'password'){
+      <button type="submit">Send Request</button>
+    </form>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    // 🔁 Smooth Background Slideshow
+    const slides = document.querySelectorAll('.bg-slideshow img');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 6000);
+
+    // 👁 Password show/hide toggle
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
         togglePassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
-    } else {
+      } else {
         passwordInput.type = 'password';
         togglePassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-    }
-});
+      }
+    });
 
-// Signup fetch
-document.getElementById('signupForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  fetch('/admin/signup', {
-    method:'POST',
-    headers:{ 'Content-Type':'application/json' },
-    body: JSON.stringify({ username, password })
-  })
-  .then(res=>res.json())
-  .then(data=>{
+    // 📨 Signup request + Auto status check
+    const form = document.getElementById('signupForm');
     const msgEl = document.getElementById('msg');
-    msgEl.innerText = data.message;
-    msgEl.style.color = data.success ? "green" : "red";
+    let intervalId;
 
-    if(data.success){
-      setTimeout(()=>{ window.location.href = 'login.html'; }, 1500);
-    }
-  })
-  .catch(err=>{
-    document.getElementById('msg').innerText = "Server error! Try again.";
-  });
-});
-</script>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      msgEl.style.color = "#fff";
+      msgEl.innerHTML = "⏳ Sending request...";
+
+      const res = await fetch('/api/admin/signup-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      msgEl.innerText = data.message;
+      msgEl.style.color = data.success ? "#00d4ff" : "red";
+
+      const existingBtn = document.getElementById('loginBtn');
+      if (existingBtn) existingBtn.remove();
+
+      if (data.success) {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(async () => {
+          const r = await fetch(`/api/admin/check-status/${username}`);
+          const statusData = await r.json();
+
+          if (statusData.status === 'accepted') {
+            msgEl.innerText = '✅ Approved! You can now log in.';
+            msgEl.style.color = "#00ff99";
+            if (!document.getElementById('loginBtn')) {
+              const loginBtn = document.createElement('button');
+              loginBtn.id = 'loginBtn';
+              loginBtn.innerText = 'Go to Login';
+              loginBtn.style.background = 'linear-gradient(45deg, #28a745, #00ff99)';
+              loginBtn.style.marginTop = '10px';
+              loginBtn.onclick = () => { window.location.href = 'login.html'; };
+              msgEl.parentNode.appendChild(loginBtn);
+            }
+            clearInterval(intervalId);
+          } 
+          else if (statusData.status === 'rejected') {
+            msgEl.innerText = '❌ Rejected by admin.';
+            msgEl.style.color = "red";
+            clearInterval(intervalId);
+          } 
+          else {
+            msgEl.innerText = '⌛ Waiting for admin approval...';
+            msgEl.style.color = "#fff";
+          }
+        }, 5000);
+      }
+    });
+  </script>
 </body>
 </html>

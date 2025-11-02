@@ -3,15 +3,148 @@
 
 <head>
   <meta charset="UTF-8">
+  <title>Manage Teachers - Admin Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Teachers</title>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <link rel="stylesheet" href="/CSS/manage-teacher.css">
-  <meta http-equiv="Expires" content="0" />
+  <link rel="stylesheet" href="/CSS/admin_home.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  
+    body {
+      background: linear-gradient(135deg, #A1FFCE, #FAFFD1);
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #74ebd5;
+      outline: none;
+      box-shadow: 0 0 5px rgba(116, 235, 213, 0.6);
+    }
+
+    button {
+      padding: 10px 15px;
+      background: #74ebd5;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #4db6ac;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table th,
+    table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    table th {
+      background: #f4f4f4;
+    }
+
+    table img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    table img:hover {
+      transform: scale(1.05);
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .delete-btn:hover {
+      background: #c0392b;
+    }
+
+    .update-btn {
+      background: #2ecc71;
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-right: 5px;
+    }
+
+    .update-btn:hover {
+      background: #27ae60;
+    }
+
+    @media screen and (max-width: 600px) {
+      table img {
+        width: 60px;
+        height: 60px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -20,29 +153,28 @@
     <h2>Admin Panel</h2>
     <ul>
       <li><a href="admin-home.html"><i class="fa fa-home"></i> Dashboard</a></li>
-      <li><a href="manage-teachers.html"><i class="fa fa-users"></i> Manage Teachers</a></li>
+      <li><a href="manage-teachers.html" class="active"><i class="fa fa-users"></i> Manage Teachers</a></li>
       <li><a href="manage-notices.html"><i class="fa fa-bell"></i> Manage Notices</a></li>
       <li><a href="manage-gallery.html"><i class="fa fa-image"></i> Manage Gallery</a></li>
-      <li><a href="manage-results.html"><i class="fa fa-graduation-cap"></i> Manage Results</a></li>
+      <li><a href="school-timing.html"><i class="fa fa-clock"></i> Class Routine</a></li>
       <li><a href="settings.html"><i class="fa fa-cog"></i> Settings</a></li>
       <li><a href="login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
     </ul>
   </div>
 
-  
+  <div class="container">
+    <h2>Add New Teacher</h2>
+    <form id="teacherForm" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Enter Teacher Name" required>
+      <input type="email" name="email" placeholder="Enter Email" required>
+      <input type="text" name="phone" placeholder="Enter Phone" required>
+      <input type="text" name="subject" placeholder="Enter Subject" required>
+      <input type="file" name="photo" accept="image/*" required>
+      <button type="submit">Add Teacher</button>
+    </form>
 
-  <div class="form-box">
-    <h3>Add Teacher</h3>
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="text" id="phone" placeholder="Phone" required>
-    <input type="text" id="subject" placeholder="Subject" required>
-    <input type="file" id="photo" accept="image/*" required>
-    <button id="addTeacherBtn">➕ Add Teacher</button>
-  </div>
-
-  <div class="table-container">
-    <table id="teacherTable">
+    <h2>Teacher List</h2>
+    <table>
       <thead>
         <tr>
           <th>ID</th>
@@ -51,94 +183,93 @@
           <th>Email</th>
           <th>Phone</th>
           <th>Subject</th>
-          <th>Actions</th>
+          <th>Action</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody id="teacherTable"></tbody>
     </table>
   </div>
 
   <script>
-    const fetchTeachers = () => {
-      fetch('/admin/teachers')
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.querySelector('#teacherTable tbody');
-          tbody.innerHTML = '';
-          data.forEach(teacher => {
-            tbody.innerHTML += `
-          <tr>
-            <td>${teacher._id}</td>
-            <td><img src="/uploads/${teacher.photo || 'default.png'}" alt="photo"></td>
-            <td contenteditable="true" class="name">${teacher.name}</td>
-            <td contenteditable="true" class="email">${teacher.email}</td>
-            <td contenteditable="true" class="phone">${teacher.phone}</td>
-            <td contenteditable="true" class="subject">${teacher.subject}</td>
-            <td>
-              <button onclick="updateTeacher('${teacher._id}', this)">Update</button>
-              <button onclick="deleteTeacher('${teacher._id}')">Delete</button>
-            </td>
-          </tr>
+    const teacherTable = document.getElementById('teacherTable');
+    const teacherForm = document.getElementById('teacherForm');
+
+    // Load Teachers
+    async function loadTeachers() {
+      const res = await fetch('/api/teachers');
+      const data = await res.json();
+
+      teacherTable.innerHTML = '';
+      data.forEach((teacher, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td><img src="${teacher.photo}" alt="teacher photo"></td>
+          <td contenteditable class="name">${teacher.name}</td>
+          <td contenteditable class="email">${teacher.email}</td>
+          <td contenteditable class="phone">${teacher.phone}</td>
+          <td contenteditable class="subject">${teacher.subject}</td>
+          <td>
+            <button class="update-btn" data-id="${teacher._id}">Update</button>
+            <button class="delete-btn" data-id="${teacher._id}">Delete</button>
+          </td>
         `;
+        teacherTable.appendChild(row);
+      });
+
+      // Delete
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (confirm('Are you sure you want to delete this teacher?')) {
+            const id = btn.dataset.id;
+            const res = await fetch(`/admin/delete-teacher/${id}`, { method: 'POST' });
+            const data = await res.json();
+            alert(data.message);
+            if (data.success) loadTeachers();
+          }
+        });
+      });
+
+      // Update
+      document.querySelectorAll('.update-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          const row = btn.closest('tr');
+          const name = row.querySelector('.name').innerText.trim();
+          const email = row.querySelector('.email').innerText.trim();
+          const phone = row.querySelector('.phone').innerText.trim();
+          const subject = row.querySelector('.subject').innerText.trim();
+
+          const res = await fetch(`/admin/update-teacher/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, phone, subject })
           });
-        });
-    };
 
-    document.getElementById('addTeacherBtn').addEventListener('click', () => {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const subject = document.getElementById('subject').value;
-      const photo = document.getElementById('photo').files[0];
-
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("subject", subject);
-      formData.append("photo", photo);
-
-      fetch('/admin/add-teacher', {
-        method: 'POST',
-        body: formData
-      })
-        .then(res => res.json())
-        .then(data => {
+          const data = await res.json();
           alert(data.message);
-          fetchTeachers();
+          if (data.success) loadTeachers();
         });
+      });
+    }
+
+    // Handle Form Submit
+    teacherForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const formData = new FormData(teacherForm);
+      const res = await fetch('/admin/add-teacher', { method: 'POST', body: formData });
+      const data = await res.json();
+      alert(data.message);
+      if (data.success) {
+        teacherForm.reset();
+        loadTeachers();
+      }
     });
 
-    function updateTeacher(id, btn) {
-      const row = btn.parentElement.parentElement;
-      const name = row.querySelector('.name').innerText;
-      const email = row.querySelector('.email').innerText;
-      const phone = row.querySelector('.phone').innerText;
-      const subject = row.querySelector('.subject').innerText;
-
-      fetch('/admin/update-teacher/' + id, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, subject })
-      })
-        .then(res => res.json())
-        .then(data => alert(data.message));
-    }
-
-    function deleteTeacher(id) {
-      if (confirm('Are you sure?')) {
-        fetch('/admin/delete-teacher/' + id, { method: 'DELETE' })
-          .then(res => res.json())
-          .then(data => {
-            alert(data.message);
-            fetchTeachers();
-          });
-      }
-    }
-
-    // Initial fetch
-    fetchTeachers();
+    // Initial Load
+    loadTeachers();
   </script>
+
 </body>
 
 </html>

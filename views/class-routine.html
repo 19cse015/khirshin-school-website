@@ -4,31 +4,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My School</title>
+  <title>Class Routine Viewer - Khirshin S.K High School</title>
   <link rel="stylesheet" href="/public/update.css">
   <link rel="stylesheet" href="/CSS/footer.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- FontAwesome for icons -->
-  <!-- FontAwesome 6 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-yH1oDFak6i0bszq+2Kc1YZFP9N6Zkq7c+JmZL49vZPJuDxRwRyQ4tGpZB3hD6Xc+RA6mQ0N+FZ8FbF69Fdu6TA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" />
 
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f8ff;
+      margin: 0;
+      padding: 0;
+    }
 
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tab-btn {
+      background: #e3f2fd;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .tab-btn:hover {
+      background: #bbdefb;
+    }
+
+    .tab-btn.active {
+      background: #007bff;
+      color: white;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .card {
+      border-radius: 10px;
+      padding: 15px;
+      background: #fff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .loading,
+    .no-data,
+    .error {
+      text-align: center;
+      color: #555;
+      font-size: 16px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+
+      th,
+      td {
+        font-size: 12px;
+        padding: 6px;
+      }
+
+      .tab-btn {
+        font-size: 14px;
+        padding: 8px 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-
-
   <div class="top-bar">
     <span>Education</span>
     <span>Discipline</span>
     <span>Character</span>
   </div>
 
-  <!-- Header Section -->
   <header class="school-header">
     <div class="logo">
       <img src="/images/logo-final.jpg" alt="School Logo">
@@ -45,10 +141,9 @@
       <button class="btn-login" onclick="window.location.href='/ADMIN/login.html'" >Login</button>
     </div>
   </header>
-
-
   <!-- Navbar -->
   <nav class="navbar">
+
     <ul class="menu">
       <li><a href="index.html">Home</a></li>
       <li class="dropdown">
@@ -66,7 +161,7 @@
           <li><a href="academic_notice.html">Academic Notice</a></li>
           <li><a href="Admission-notice.html">Admission Notice</a></li>
           <li><a href="Event_notice.html">Event Notice</a></li>
-          <li><a href="Result.html"> Result</a></li>
+          <li><a href="Result.html">Result</a></li>
         </ul>
       </li>
       <li class="dropdown">
@@ -78,112 +173,27 @@
           <li><a href="#">Awards</a></li>
         </ul>
       </li>
-
     </ul>
   </nav>
 
-  <!-- Notice Headline -->
-  <div class="notice-headline">
-    <span class="text">
-      Latest Notice: Class 9 Exam Routine Published | Admission Open for 2025 | Annual Sports Day Next Week
-    </span>
+  <!-- Routine Container -->
+  <div class="container">
+    <h2>Class Routine Viewer</h2>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-class="6">Class 6</button>
+      <button class="tab-btn" data-class="7">Class 7</button>
+      <button class="tab-btn" data-class="8">Class 8</button>
+      <button class="tab-btn" data-class="9">Class 9</button>
+      <button class="tab-btn" data-class="10">Class 10</button>
+    </div>
+
+    <div id="routineContainer" class="routine-container">
+      <p class="loading">Select a class to view its routine</p>
+    </div>
   </div>
 
-  <!-- Content Section -->
-  <div class="main-section">
-
-    <!-- Left: Motivational Speech -->
-    <div class="left-box">
-      <h2>Motivational Speech</h2>
-      <p id="motivation">Education is the most powerful weapon which you can use to change the world. – Nelson Mandela
-      </p>
-
-    </div>
-
-    <!-- Middle: Image Slider -->
-    <div class="slider">
-      <div class="slides">
-        <img src="/images/school1.jpg" alt="Slide 1">
-        <img src="/images/school2.jpg" alt="Slide 2">
-        <img src="/images/school3.jpg" alt="Slide 3">
-        <img src="/images/pic5.jpg" alt="Slide 4">
-      </div>
-    </div>
-
-    <!-- Right: School Facilities -->
-    <div class="right-box">
-      <h2>Our Facilities</h2>
-      <ul>
-        <li>Modern Library</li>
-        <li>Computer Lab</li>
-        <li>Science Lab</li>
-        <li>Playground</li>
-        <li>Cultural Activities</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <section id="features">
-    <h2 class="section-title">Our Key Features</h2>
-
-    <div class="features-container">
-      <div class="feature-card">
-        <i class="fa-solid fa-user-graduate"></i>
-        <h3>Experienced Teachers</h3>
-        <p>Highly qualified teachers guiding every student with care.</p>
-      </div>
-
-      <div class="feature-card">
-        <i class="fa-solid fa-school"></i>
-        <h3>Smart Classrooms</h3>
-        <p>Modern digital classrooms equipped with advanced tools.</p>
-      </div>
-
-      <div class="feature-card">
-        <i class="fa-solid fa-book-open"></i>
-        <h3>Library Facility</h3>
-        <p>Access to a wide range of books and study materials.</p>
-      </div>
-
-      <div class="feature-card">
-        <i class="fa-solid fa-medal"></i>
-        <h3>Achievements</h3>
-        <p>Proven record of success in academic and co-curricular fields.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="statistics">
-    <h2 class="stat-head">Statistics</h2>
-    <p>Our Organization At a Glance</p>
-    <div class="stats-container">
-      <div class="stat-item">
-        <img src="/images/class.jpg" alt="Classes">
-        <h3 class="count" data-target="5">0</h3>
-        <p>Classes</p>
-      </div>
-      <div class="stat-item">
-        <img src="/images/student.png" alt="Students">
-        <h3 class="count" data-target="650">0</h3>
-        <p>Students</p>
-      </div>
-      <div class="stat-item">
-        <img src="/images/teacher.png" alt="Teachers">
-        <h3 class="count" data-target="16">0</h3>
-        <p>Teachers</p>
-      </div>
-      <div class="stat-item">
-        <img src="/images/staff.png" alt="Staffs">
-        <h3 class="count" data-target="5">0</h3>
-        <p>Staffs</p>
-      </div>
-    </div>
-  </section>
-
-
-
+  <!-- Footer -->
   <footer>
     <div class="row">
       <!-- Contact -->
@@ -261,68 +271,76 @@
     <script src="/public/year.js"></script>
   </footer>
 
-  <script src="/public/script.js"></script>
+
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const counters = document.querySelectorAll(".count");
-      const speed = 200; // speed control (lower = faster)
+    const buttons = document.querySelectorAll(".tab-btn");
+    const container = document.getElementById("routineContainer");
 
-      const startCounting = (counter) => {
-        const target = +counter.getAttribute("data-target");
-        const count = +counter.innerText;
-        const increment = Math.ceil(target / speed);
+    // ✅ Helper function: convert 24-hour to 12-hour format
+    function formatTime24to12(time24) {
+      if (!time24) return "";
+      let [hour, minute] = time24.split(":");
+      hour = parseInt(hour);
+      const ampm = hour >= 12 ? "PM" : "AM";
+      hour = hour % 12 || 12;
+      return `${hour}:${minute} ${ampm}`;
+    }
 
-        if (count < target) {
-          counter.innerText = count + increment;
-          setTimeout(() => startCounting(counter), 50);
-        } else {
-          counter.innerText = target;
+    buttons.forEach(btn => {
+      btn.addEventListener("click", async () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const className = btn.dataset.class;
+
+        container.innerHTML = `<p class="loading">Loading routine for Class ${className}...</p>`;
+
+        try {
+          const response = await fetch(`/api/routine/class/${className}`);
+          const data = await response.json();
+
+          if (!response.ok || !data || !data.rows) {
+            container.innerHTML = `<p class="no-data">No routine found for Class ${className}</p>`;
+            return;
+          }
+
+          const rows = data.rows.map(row => {
+            const [start, end] = row.time.split(" - ");
+            const formattedTime = `${formatTime24to12(start)} - ${formatTime24to12(end)}`;
+            return `
+              <tr>
+                <td>${formattedTime}</td>
+                ${row.subjects.map(sub => `<td>${sub || '-'}</td>`).join('')}
+              </tr>
+            `;
+          }).join('');
+
+          container.innerHTML = `
+            <div class="card">
+              <h3>Class ${data.class}</h3>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Sunday</th>
+                      <th>Monday</th>
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                    </tr>
+                  </thead>
+                  <tbody>${rows}</tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        } catch (err) {
+          console.error(err);
+          container.innerHTML = `<p class="error">⚠️ Error loading routine for Class ${className}</p>`;
         }
-      };
-
-      const observer = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              startCounting(entry.target);
-              observer.unobserve(entry.target); // stop observing after animation
-            }
-          });
-        },
-        { threshold: 0.6 } // trigger when 30% visible
-      );
-
-      counters.forEach(counter => {
-        observer.observe(counter);
       });
     });
   </script>
-
-
-
-
-  <script>
-    const cards = document.querySelectorAll('.feature-card');
-
-    const showCards = () => {
-      const triggerBottom = window.innerHeight * 0.85;
-      cards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        if (cardTop < triggerBottom) {
-          card.classList.add('show');
-        }
-      });
-    };
-
-    window.addEventListener('scroll', showCards);
-    showCards(); // Initial call in case already in view
-  </script>
-
-
-
-
-
-
 </body>
 
 </html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Routine</title>
+<link rel="stylesheet" href="/CSS/class-routine.css">
+</head>
+<body>
+<div class="container">
+    <h2>Class Routine</h2>
+    <label for="classSelect">Select Class:</label>
+    <select id="classSelect">
+        <option value="">--Select--</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+    </select>
+
+    <div id="routineSection" class="routine-section hidden">
+        <button id="addRowBtn" class="add-btn">Add Row</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time (Start–End)</th>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="routineBody"></tbody>
+        </table>
+        <button id="submitBtn" class="submit-btn">Submit Routine</button>
+    </div>
+</div>
+
+<script>
+const classSelect = document.getElementById("classSelect");
+const routineSection = document.getElementById("routineSection");
+const routineBody = document.getElementById("routineBody");
+const addRowBtn = document.getElementById("addRowBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+const subjects = ["Bangla", "English", "Math", "Science", "ICT", "Religion", "History", "Free Period"];
+
+// Show routine section when class selected
+classSelect.addEventListener("change", () => {
+    if (classSelect.value) {
+        routineSection.classList.remove("hidden");
+        routineBody.innerHTML = "";
+    } else {
+        routineSection.classList.add("hidden");
+    }
+});
+
+// Add row
+addRowBtn.addEventListener("click", () => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td class="time-cell">
+            <input type="time" class="time-input start">
+            <span>to</span>
+            <input type="time" class="time-input end">
+        </td>
+        ${["Sun","Mon","Tue","Wed","Thu"].map(() => `
+            <td>
+                <select>
+                    <option value="">--Select--</option>
+                    ${subjects.map(sub => `<option>${sub}</option>`).join('')}
+                </select>
+            </td>
+        `).join('')}
+        <td>
+            <button class="delete-row-btn">❌</button>
+        </td>
+    `;
+    // Delete row event
+    row.querySelector(".delete-row-btn").addEventListener("click", () => row.remove());
+    routineBody.appendChild(row);
+});
+
+// Submit routine
+submitBtn.addEventListener("click", async () => {
+    const className = classSelect.value;
+    if (!className) {
+        alert("Please select a class!");
+        return;
+    }
+
+    const rows = routineBody.querySelectorAll("tr");
+    if (rows.length === 0) {
+        alert("Please add at least one row before submitting!");
+        return;
+    }
+
+    const routineData = [];
+    try {
+        rows.forEach(row => {
+            const timeStart = row.querySelector(".start").value;
+            const timeEnd = row.querySelector(".end").value;
+            if (!timeStart || !timeEnd) throw new Error("Please enter start and end time for all rows.");
+
+            const subjectsSelected = Array.from(row.querySelectorAll("select")).map(sel => sel.value);
+            routineData.push({ time: `${timeStart} - ${timeEnd}`, subjects: subjectsSelected });
+        });
+    } catch (err) {
+        alert(err.message);
+        return;
+    }
+
+    const payload = { className, rows: routineData };
+
+    try {
+        const response = await fetch("/api/routine", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.message);
+            routineBody.innerHTML = "";
+            classSelect.value = "";
+            routineSection.classList.add("hidden");
+        } else {
+            alert("Error: " + data.error);
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Failed to save routine. Check console for details.");
+    }
+});
+</script>
+</body>
+</html>

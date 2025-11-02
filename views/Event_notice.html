@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admission Notices - Khirshin S.K High School</title>
+  <title>Event Notices - Khirshin S.K High School</title>
   <link rel="stylesheet" href="/public/update.css">
   <link rel="stylesheet" href="/CSS/footer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -49,7 +49,7 @@
     }
 
     .table-container a {
-      color: #3498db;
+      color: #007bff;
       text-decoration: none;
       font-weight: 500;
     }
@@ -58,20 +58,15 @@
       text-decoration: underline;
     }
 
-
-    /* ===== Responsive: Small screens ===== */
     @media(max-width: 768px) {
       .table-container {
         overflow-x: auto;
-        /* horizontal scroll */
       }
 
       .table-container table {
         min-width: 600px;
-        /* ensure table doesn't shrink too much */
       }
 
-      /* Optional: adjust padding & font size for small screens */
       .table-container th,
       .table-container td {
         padding: 10px;
@@ -82,13 +77,31 @@
 </head>
 
 <body>
+  <div class="top-bar">
+    <span>Education</span>
+    <span>Discipline</span>
+    <span>Character</span>
+  </div>
+  <header class="school-header">
+    <div class="logo">
+      <img src="/images/logo-final.jpg" alt="School Logo">
+    </div>
+
+    <div class="school-info">
+      <h1>KHIRSHIN S.K HIGH SCHOOL</h1>
+      <p>Patnitala, Naogaon, Bangladesh</p>
+      <p>Established: 1943 | School Code: 1234 | EIIN: 123571</p>
+    </div>
+
+    <div class="header-btn">
+
+      <button class="btn-login" onclick="window.location.href='/ADMIN/login.html'" >Login</button>
+    </div>
+  </header>
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">
-      <img src="/images/logo-final.jpg" alt="">
-      <p>Khirshin S.K High School</p>
-    </div>
+
     <ul class="menu">
       <li><a href="index.html">Home</a></li>
       <li class="dropdown">
@@ -106,14 +119,14 @@
           <li><a href="academic_notice.html">Academic Notice</a></li>
           <li><a href="Admission-notice.html">Admission Notice</a></li>
           <li><a href="Event_notice.html">Event Notice</a></li>
-          <li><a href="Result.html"> Result</a></li>
+          <li><a href="Result.html">Result</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#">Student Affairs ▾</a>
         <ul class="dropdown-content">
-          <li><a href="#">School Uniform</a></li>
-          <li><a href="#">School Timing</a></li>
+          <li><a href="school-uniform.html">School Uniform</a></li>
+          <li><a href="class-routine.html">School Timing</a></li>
           <li><a href="photo-galarry.html">Photo Gallery</a></li>
           <li><a href="#">Awards</a></li>
         </ul>
@@ -121,12 +134,11 @@
     </ul>
   </nav>
 
-  <!-- Admission Notices Section -->
-
+  <!-- Event Notices Section -->
   <section class="notice-section">
     <h2 style="text-align: center; margin-top: 20px;">Event Notices</h2>
     <div class="table-container">
-      <table id="examNoticeTable">
+      <table id="eventNoticeTable">
         <thead>
           <tr>
             <th>SL</th>
@@ -142,81 +154,137 @@
     </div>
   </section>
 
-
   <!-- Footer -->
   <footer>
     <div class="row">
+      <!-- Contact -->
       <div class="col">
         <h3>Contact Us</h3>
-        <ul>
-          <li><a href="">Email: info@gstu.edu</a></li>
-          <li><a href="">Phone: +880 1234-567890</a></li>
-          <li><a href="">Address: Gazipur, Bangladesh</a></li>
+        <ul class="contact-info">
+          <li><i class="fas fa-envelope"></i><span>info@khirshinskhs.edu.bd</span></li>
+          <li><i class="fas fa-phone-alt"></i><span>+880 1234-567890</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Khirshin, Patnitala, Naogaon, Bangladesh</span></li>
         </ul>
       </div>
-      <div class="col">
+
+
+      <!-- Quick Links -->
+      <div class="col footer-icons">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about.html">About Us</a></li>
+          <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="principal-message.html"><i class="fa-solid fa-user-tie"></i> Principal's Message</a></li>
+          <li><a href="history_of_school.html"><i class="fa-solid fa-school"></i> About Our School</a></li>
+          <li><a href="Teacher_list.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teacher List</a></li>
+          <li><a href="class-routine.html"><i class="fa-solid fa-clock"></i> Class Routine</a></li>
+          <li><a href="exam_notice.html"><i class="fa-solid fa-file-alt"></i> Exam Notice</a></li>
+          <li><a href="Admission-notice.html"><i class="fa-solid fa-file-import"></i> Admission Notice</a></li>
+          <li><a href="photo-galarry.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
         </ul>
       </div>
-      <div class="col">
+
+
+      <!-- Social Media -->
+
+      <div class="col follow-us">
         <h3>Follow Us</h3>
-        <ul>
-          <li><a href="">Facebook</a></li>
-          <li><a href="">Twitter</a></li>
-        </ul>
+        <div class="social-icons">
+          <a href="#" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+          </a>
+          <a href="#" class="social-icon twitter">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
+          <a href="#" class="social-icon linkedin">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="#" class="social-icon youtube">
+            <i class="fab fa-youtube"></i>
+            <span>YouTube</span>
+          </a>
+        </div>
       </div>
+
+
+
+      <!-- About -->
       <div class="col">
-        <h3>About GSTU</h3>
+        <h3>About Us</h3>
         <ul>
-          <li><a href="">Committed to providing world-class education and research facilities.</a></li>
+          <li><a href="">Khirshin S.K High School, established in 1943, is a renowned educational institution in
+              Patnitala, Naogaon.
+              We are dedicated to providing quality education that builds knowledge, discipline, and character in every
+              student.
+
+            </a></li>
         </ul>
+
       </div>
     </div>
-    <hr>
-    <p>&copy;<span id="year"></span> All Rights Reserved By <span style="font-size: medium;">Md.Arif Hossain</span></p>
 
+    <hr>
+
+    <p>&copy;<span id="year"></span> All Rights Reserved By Md.Arif Hossain</p>
     <script src="/public/year.js"></script>
   </footer>
 
+
   <script>
-    // Fetch admission notices from backend
-    async function loadAdmissionNotices() {
+    // Fetch Event Notices from backend
+    async function loadEventNotices() {
       try {
         const res = await fetch('/api/notices');
         const data = await res.json();
-        const tbody = document.querySelector('#examNoticeTable tbody');
+        const tbody = document.querySelector('#eventNoticeTable tbody');
         tbody.innerHTML = '';
 
-        const examNotices = data.filter(n => n.category === 'event');
+        const eventNotices = data.filter(n => n.category === 'event');
 
-        if (examNotices.length === 0) {
+        if (eventNotices.length === 0) {
           tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No Event notices available.</td></tr>';
           return;
         }
 
-        examNotices.forEach((n, index) => {
+        eventNotices.forEach((n, index) => {
+          let pdfURL = n.pdf_file;
+
+          // Cloudinary raw PDF inline view fix
+          if (pdfURL.includes('/upload/')) {
+            pdfURL = pdfURL.replace('/upload/', '/upload/fl_attachment:false/');
+          }
+
+
           const tr = document.createElement('tr');
           tr.innerHTML = `
-                <td data-label="SL">${index + 1}</td>
-                  <td data-label="Title">${n.title}</td>
-                  <td data-label="View"><a href="/uploads/${n.pdf_file}" target="_blank"><i class="fa fa-eye"></i> View</a></td>
-               <td data-label="Download"><a href="/uploads/${n.pdf_file}" download><i class="fa fa-download"></i> Download</a></td>
-               `;
+            <td data-label="SL">${index + 1}</td>
+            <td data-label="Title">${n.title}</td>
+            <td data-label="View">
+
+              <a href="${pdfURL}" target="_blank"><i class="fa fa-eye"></i> View</a>
+
+            </td>
+            <td data-label="Download">
+              <a href="${n.pdf_file}" download><i class="fa fa-download"></i> Download</a>
+            </td>
+          `;
           tbody.appendChild(tr);
         });
 
       } catch (err) {
         console.error(err);
-        const tbody = document.querySelector('#examNoticeTable tbody');
+        const tbody = document.querySelector('#eventNoticeTable tbody');
         tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Error loading notices.</td></tr>';
       }
     }
 
-    loadAdmissionNotices();
+    // Initial load
+    loadEventNotices();
 
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 

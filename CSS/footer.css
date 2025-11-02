@@ -1,5 +1,3 @@
-
-
 footer {
   width: 100%;
   background: linear-gradient(to right, #00093e, #2d0b00);
@@ -8,7 +6,7 @@ footer {
   font-size: 14px;
   line-height: 30px;
   position: relative;
-  
+
 }
 
 /* Row setup */
@@ -17,7 +15,7 @@ footer {
   width: 100%;
   flex-wrap: wrap;
   gap: 50px;
-  justify-content:flex-start;
+  justify-content: flex-start;
   margin-bottom: 30px;
 }
 
@@ -26,17 +24,20 @@ footer {
   flex-basis: 25%;
   /* চারটা কলাম nicely ফিট হবে */
   min-width: 200px;
-  
+
 }
 
-.col:nth-child(2),.col:nth-child(3)
-{
-    flex-basis: 15%;;
+.col:nth-child(2),
+.col:nth-child(3) {
+  flex-basis: 15%;
+  ;
 }
 
 .col h3 {
-  position: relative; /* ::after কে position করানোর জন্য */
-  display: inline-block; /* underline টা শুধু টেক্সট এর নিচে থাকবে */
+  position: relative;
+  /* ::after কে position করানোর জন্য */
+  display: inline-block;
+  /* underline টা শুধু টেক্সট এর নিচে থাকবে */
   cursor: pointer;
 }
 
@@ -53,7 +54,8 @@ footer {
 }
 
 .col h3:hover::after {
-  width: 100%; /* hover করলে পুরো underline আসবে */
+  width: 100%;
+  /* hover করলে পুরো underline আসবে */
   animation: gradient-move 1.5s linear infinite;
 }
 
@@ -61,6 +63,7 @@ footer {
   0% {
     background-position: 0% 40%;
   }
+
   100% {
     background-position: 100% 40%;
   }
@@ -71,7 +74,7 @@ footer {
 .col ul {
   list-style: none;
   padding: 0;
-  
+
 }
 
 .col ul li {
@@ -81,12 +84,152 @@ footer {
 .col ul li a {
   color: #fff;
   text-decoration: none;
-   transition: 0.3s;
+  transition: 0.3s;
 }
 
 .col ul li a:hover {
   color: #0bc801;
   padding-left: 5px;
+}
+
+.contact-info {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  color: #fff;
+  font-size: 15px;
+  word-break: break-word;
+}
+
+.contact-info i {
+  color: #00bcd4;
+  min-width: 20px;
+  font-size: 18px;
+}
+
+
+.footer-icons i {
+  font-size: 20px;
+  color: #00bcd4;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.footer-icons i:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Container setup */
+.follow-us {
+  text-align: left;
+  
+}
+
+
+
+/* Social icon container */
+.social-icons {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Each icon design */
+.social-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+/* Icon label */
+.social-icon span {
+  position: absolute;
+  bottom: -20px;
+  opacity: 0;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+/* Hover effect */
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-icon:hover span {
+  bottom: -30px;
+  opacity: 1;
+}
+
+/* Platform specific colors */
+.facebook {
+  background: #1877f2;
+}
+
+.twitter {
+  background: #1da1f2;
+}
+
+.linkedin {
+  background: #0077b5;
+}
+
+.youtube {
+  background: #ff0000;
+}
+
+.social-icon:hover.facebook {
+  background: #145db2;
+}
+
+.social-icon:hover.twitter {
+  background: #0c85d0;
+}
+
+.social-icon:hover.linkedin {
+  background: #006097;
+}
+
+.social-icon:hover.youtube {
+  background: #cc0000;
+}
+
+
+
+/* ✅ Mobile Responsive Fix */
+@media (max-width: 600px) {
+  .contact-info li {
+    display: flex;
+    flex-wrap: nowrap;
+
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .contact-info i {
+    font-size: 16px;
+  }
 }
 
 
@@ -99,10 +242,12 @@ footer hr {
   margin: 20px 0;
 }
 
+
+
 /* Bottom text */
 footer p {
 
-    
+
   text-align: center;
   margin: 0;
 }

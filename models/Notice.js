@@ -1,9 +1,13 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const NoticeSchema = new Schema({
+const noticeSchema = new mongoose.Schema(
+  {
     title: { type: String, required: true },
-    category: { type: String, required: true }, // e.g., "exam", "admission"
-    pdf_file: { type: String, required: true } // Cloudinary PDF URL
-}, { timestamps: true });
+    category: { type: String, required: true },
+    pdf_file: { type: String },
+    pdf_public_id: { type: String }, // Cloudinary public ID
+  },
+  { timestamps: true }
+);
 
-module.exports = model('Notice', NoticeSchema);
+module.exports = mongoose.model('Notice', noticeSchema);

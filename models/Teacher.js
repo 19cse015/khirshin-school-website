@@ -1,11 +1,11 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const TeacherSchema = new Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    phone: { type: String, required: true },
-    subject: { type: String, required: true },
-    photo: { type: String } // Cloudinary URL রাখার জন্য
+const teacherSchema = new mongoose.Schema({
+  name: String,
+  subject: String,
+  email: String,
+  phone: String,
+  photo: String,
 }, { timestamps: true });
 
-module.exports = model('Teacher', TeacherSchema);
+module.exports = mongoose.model('Teacher', teacherSchema);

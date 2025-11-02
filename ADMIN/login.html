@@ -1,94 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Login</title>
-<link rel="stylesheet" href="../CSS/login_signup.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      flex-direction: column;
+    }
+
+    /* Breadcrumb (Home >> Login) */
+    .breadcrumb-bar {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: left;
+      padding: 12px 25px;
+      font-size: 16px;
+      z-index: 5;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb-bar ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .breadcrumb-bar a {
+      color: #00aaff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb-bar a:hover {
+      color: #66d9ff;
+      text-decoration: underline;
+    }
+
+    /* Background slideshow */
+    .bg-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .bg-slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .bg-slideshow img.active {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(5px);
+      z-index: 2;
+    }
+
+    .admin-section {
+      position: relative;
+      z-index: 4;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px 35px;
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      color: white;
+      animation: fadeIn 1s ease;
+      margin-top: 70px; /* breadcrumb er niche space */
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+
+    input::placeholder {
+      color: #eee;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password,
+    .toggle-shared {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #ddd;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: rgba(0, 119, 255, 0.8);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: rgba(0, 119, 255, 1);
+      transform: scale(1.03);
+    }
+
+    #msg {
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    a {
+      color: #00aaff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Spinner */
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid #00aaff;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .success {
+      color: lightgreen;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @media (max-width: 480px) {
+      .admin-section {
+        padding: 25px 20px;
+      }
+
+      .breadcrumb-bar {
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<section class="admin-section">
-  <h2>Admin Login</h2>
 
-  <form id="loginForm">
-    <input type="text" id="username" placeholder="Username" required><br><br>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <ul>
+      <li><i class="fa-solid fa-house"></i> <a href="/index.html">Home</a></li>
+      <li>&gt;&gt;</li>
+      <li>Login</li>
+    </ul>
+  </div>
 
-    <!-- Password field with show/hide -->
-    <div class="password-wrapper">
-      <input type="password" id="password" placeholder="Password" required>
-      <span class="toggle-password"><i class="fa-solid fa-eye"></i></span>
-    </div><br><br>
+  <!-- Background slideshow -->
+  <div class="bg-slideshow">
+    <img src="/images/security.jpg" class="active">
+    <img src="/images/security2.jpg">
+    <img src="/images/security3.jpg">
+    <img src="/images/security5.jpg">
+  </div>
 
-    <!-- Shared password field -->
-    <div class="password-wrapper">
-      <input type="password" id="sharedPassword" placeholder="Shared Password" required>
-      <span class="toggle-shared"><i class="fa-solid fa-eye"></i></span>
-    </div><br><br>
+  <div class="overlay"></div>
 
-    <button type="submit">Login</button>
-  </form>
+  <!-- Login section -->
+  <section class="admin-section">
+    <h2>Admin Login</h2>
 
-  <p id="msg"></p>
-  <p>Don't have an account? <a href="signup.html">Sign Up here</a></p>
-</section>
+    <form id="loginForm">
+      <div class="password-wrapper">
+        <input type="text" id="username" placeholder="Username" required>
+      </div>
 
-<script>
-// Show/hide password
-const togglePassword = document.querySelector('.toggle-password');
-const passwordInput = document.getElementById('password');
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="toggle-password"><i class="fa-solid fa-eye-slash"></i></span>
+      </div>
 
-togglePassword.addEventListener('click', () => {
-    if(passwordInput.type === 'password'){
-        passwordInput.type = 'text';
-        togglePassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
-    } else {
-        passwordInput.type = 'password';
-        togglePassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-    }
-});
+      <div class="password-wrapper">
+        <input type="password" id="sharedPassword" placeholder="Shared Password" required>
+        <span class="toggle-shared"><i class="fa-solid fa-eye-slash"></i></span>
+      </div>
 
-// Show/hide shared password
-const toggleShared = document.querySelector('.toggle-shared');
-const sharedInput = document.getElementById('sharedPassword');
+      <button type="submit" id="loginBtn">Login</button>
+    </form>
 
-toggleShared.addEventListener('click', () => {
-    if(sharedInput.type === 'password'){
-        sharedInput.type = 'text';
-        toggleShared.innerHTML = '<i class="fa-solid fa-eye"></i>';
-    } else {
-        sharedInput.type = 'password';
-        toggleShared.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-    }
-});
+    <p id="msg"></p>
+    <p>Don't have an account? <a href="signup.html">Sign Up here</a></p>
+  </section>
 
-// Login fetch
-document.getElementById('loginForm').addEventListener('submit', function(e){
-  e.preventDefault();
+  <script>
+    // Background slideshow
+    const images = document.querySelectorAll('.bg-slideshow img');
+    let index = 0;
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, 6000);
 
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const sharedPassword = document.getElementById('sharedPassword').value.trim();
+    // Password toggle
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+    togglePassword.addEventListener('click', () => {
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+      togglePassword.innerHTML = passwordInput.type === 'text'
+        ? '<i class="fa-solid fa-eye"></i>'
+        : '<i class="fa-solid fa-eye-slash"></i>';
+    });
 
-  fetch('/admin/login', {
-    method:'POST',
-    headers:{ 'Content-Type':'application/json' },
-    body: JSON.stringify({ username, password, sharedPassword })
-  })
-  .then(res => res.json())
-  .then(data => {
-    const msgEl = document.getElementById('msg');
-    msgEl.innerText = data.message;
-    msgEl.style.color = data.success ? "green" : "red";
+    const toggleShared = document.querySelector('.toggle-shared');
+    const sharedInput = document.getElementById('sharedPassword');
+    toggleShared.addEventListener('click', () => {
+      sharedInput.type = sharedInput.type === 'password' ? 'text' : 'password';
+      toggleShared.innerHTML = sharedInput.type === 'text'
+        ? '<i class="fa-solid fa-eye"></i>'
+        : '<i class="fa-solid fa-eye-slash"></i>';
+    });
 
-    if(data.success){
-      window.location.href = '/admin/home.html';
-    }
-  })
-  .catch(err => {
-    document.getElementById('msg').innerText = "Server error! Try again.";
-  });
-});
-</script>
+    // Login form submit
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const sharedPassword = document.getElementById('sharedPassword').value.trim();
+      const msgEl = document.getElementById('msg');
+      const btn = document.getElementById('loginBtn');
+
+      msgEl.innerHTML = '<span class="spinner"></span>Verifying credentials...';
+      msgEl.style.color = "white";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, sharedPassword })
+        });
+        const data = await res.json();
+
+        setTimeout(() => {
+          if (data.success) {
+            msgEl.innerHTML = '✅<span class="success">Login successful!</span>';
+            setTimeout(() => window.location.href = '/ADMIN/home.html', 1500);
+          } else {
+            msgEl.innerText = data.message;
+            msgEl.style.color = "red";
+            btn.disabled = false;
+          }
+        }, 1200);
+      } catch (err) {
+        msgEl.innerText = "⚠️ Server error! Try again.";
+        msgEl.style.color = "red";
+        btn.disabled = false;
+      }
+    });
+  </script>
 </body>
+
 </html>

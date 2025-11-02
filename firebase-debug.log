@@ -1,0 +1,55 @@
+[debug] [2025-10-24T07:39:16.977Z] ----------------------------------------------------------------------
+[debug] [2025-10-24T07:39:16.982Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-10-24T07:39:16.982Z] CLI Version:   14.22.0
+[debug] [2025-10-24T07:39:16.983Z] Platform:      win32
+[debug] [2025-10-24T07:39:16.983Z] Node Version:  v24.7.0
+[debug] [2025-10-24T07:39:16.983Z] Time:          Fri Oct 24 2025 12:39:16 GMT+0500 (Pakistan Standard Time)
+[debug] [2025-10-24T07:39:16.983Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\HP\Desktop\test_web
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2025-10-24T07:41:58.434Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-10-24T07:41:58.434Z] > authorizing via signed-in user (sumon19cse015@gmail.com)
+[debug] [2025-10-24T07:42:44.115Z] Checked if tokens are valid: true, expires at: 1761295102319
+[debug] [2025-10-24T07:42:44.116Z] Checked if tokens are valid: true, expires at: 1761295102319
+[debug] [2025-10-24T07:42:44.119Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2025-10-24T07:42:44.119Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"arif10cse015"}
+[debug] [2025-10-24T07:42:44.961Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2025-10-24T07:42:44.961Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"arif10cse015"}
+[debug] [2025-10-24T07:43:46.745Z] Checked if tokens are valid: true, expires at: 1761295102319
+[debug] [2025-10-24T07:43:46.745Z] Checked if tokens are valid: true, expires at: 1761295102319
+[debug] [2025-10-24T07:43:46.745Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2025-10-24T07:43:46.745Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"arif10cse015","name":"arif19cse015"}
+[debug] [2025-10-24T07:43:48.593Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2025-10-24T07:43:48.593Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.6947633699816594186"}
+[debug] [2025-10-24T07:43:48.595Z] Checked if tokens are valid: true, expires at: 1761295102319
+[debug] [2025-10-24T07:43:48.595Z] Checked if tokens are valid: true, expires at: 1761295102319
+[debug] [2025-10-24T07:43:48.596Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6947633699816594186 [none]
+[debug] [2025-10-24T07:43:49.931Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6947633699816594186 200
+[debug] [2025-10-24T07:43:49.931Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6947633699816594186 {"name":"operations/create_project.global.6947633699816594186","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":9,"message":"Callers must accept Terms of Service","details":[{"@type":"type.googleapis.com/google.rpc.PreconditionFailure","violations":[{"type":"TOS","subject":"cloud","description":"Callers must accept Terms of Service"}]}]}}
+[debug] [2025-10-24T07:43:50.214Z] FirebaseError: Callers must accept Terms of Service
+    at OperationPoller.poll (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\operation-poller.js:24:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createCloudProject (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:227:29)
+    at async createFirebaseProjectAndLog (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:87:9)
+    at async Object.doSetup (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\project.js:65:24)
+    at async init (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:77:13)
+    at async Command.initAction [as actionFn] (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\init.js:219:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.

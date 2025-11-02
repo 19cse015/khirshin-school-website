@@ -111,7 +111,6 @@
       background: #c0392b;
     }
 
-    /* Responsive */
     @media screen and (max-width: 600px) {
       table img {
         width: 70px;
@@ -128,7 +127,6 @@
 
 <body>
 
-
   <div class="sidebar">
     <h2>Admin Panel</h2>
     <ul>
@@ -136,11 +134,12 @@
       <li><a href="manage-teachers.html"><i class="fa fa-users"></i> Manage Teachers</a></li>
       <li><a href="manage-notices.html"><i class="fa fa-bell"></i> Manage Notices</a></li>
       <li><a href="manage-gallery.html"><i class="fa fa-image"></i> Manage Gallery</a></li>
-      <li><a href="manage-results.html"><i class="fa fa-graduation-cap"></i> Manage Results</a></li>
+      <li><a href="school-timing.html"><i class="fa fa-graduation-cap"></i> Class Routine</a></li>
       <li><a href="settings.html"><i class="fa fa-cog"></i> Settings</a></li>
       <li><a href="login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
     </ul>
   </div>
+
   <div class="container">
     <h2>Upload New Gallery Image</h2>
     <form id="uploadForm" enctype="multipart/form-data">
@@ -176,9 +175,10 @@
       data.forEach((item, index) => {
         const row = document.createElement('tr');
 
+        // Cloudinary URL দিয়ে show
         row.innerHTML = `
           <td>${index + 1}</td>
-          <td><img src="/uploads/${item.filename}" alt="photo"></td>
+          <td><img src="${item.filename}" alt="photo"></td>
           <td>${item.title}</td>
           <td>
             <button class="delete-btn" data-id="${item._id}">Delete</button>
@@ -187,7 +187,7 @@
         galleryTable.appendChild(row);
       });
 
-      // Attach delete event
+      // Attach delete events
       document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
           const id = btn.dataset.id;
@@ -217,6 +217,7 @@
       }
     });
   </script>
+
 </body>
 
 </html>

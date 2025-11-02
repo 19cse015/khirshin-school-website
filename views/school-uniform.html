@@ -4,106 +4,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khirshin S.K High School</title>
-    <link rel="stylesheet" href="/CSS/footer.css">
     <link rel="stylesheet" href="/public/update.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- FontAwesome 6 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-yH1oDFak6i0bszq+2Kc1YZFP9N6Zkq7c+JmZL49vZPJuDxRwRyQ4tGpZB3hD6Xc+RA6mQ0N+FZ8FbF69Fdu6TA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/CSS/footer.css">
+    <title>Khirshin School</title>
 
     <style>
-
-         .heading h2{
-            background-color: rgb(60, 13, 101);
-            color: orangered;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 25px;
-            margin-bottom: 15px;
-            border-right: 8px solid tomato;
-            border-left: 8px solid tomato;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
         }
-        /* Gallery Section */
-        .gallery-section {
-            padding: 50px 20px;
-            text-align: center;
-        }
-       
 
-
-        /* Grid container */
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+        .uniform-section {
+            position: relative;
             width: 100%;
-            margin: 0 auto;
-        }
-
-        /* Card styles */
-        .gallery-card {
-            background: #fff;
-            border-radius: 12px;
-            border: 1px solid #ddd;
+            min-height: 100vh;
             overflow: hidden;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            aspect-ratio: 1 / 1;
+            flex-direction: column;
         }
 
-        .gallery-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .gallery-card img {
+        .slideshow img {
+            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            opacity: 0;
+            transition: opacity 2s ease-in-out, transform 6s ease-in-out;
         }
 
-        .gallery-card:hover img {
+        .slideshow img.active {
+            opacity: 1;
             transform: scale(1.05);
         }
 
-        /* ===== Responsive ===== */
-        @media (max-width: 992px) {
-            .gallery-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
+
+        .uniform-card {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            text-align: center;
+            animation: fadeIn 1.2s ease;
+            margin: 40px 0;
+        }
+
+        .uniform-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .uniform-card h2 {
+            margin-bottom: 10px;
+            font-size: 1.8em;
+            color: #fff;
+            text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
+        /* ✅ Responsive Design */
         @media (max-width: 768px) {
-            .gallery-container {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            .uniform-card {
+                max-width: 340px;
+                padding: 18px;
+                margin: 30px 0;
             }
 
-            .gallery-section h2 {
-                font-size: 24px;
+            .uniform-card h2 {
+                font-size: 1.5em;
             }
         }
 
         @media (max-width: 480px) {
-            .gallery-container {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            .uniform-section {
+                min-height: auto;
+                padding: 60px 0;
             }
 
-            .gallery-section h2 {
-                font-size: 20px;
+            .uniform-card {
+                width: 85%;
+                max-width: 280px;
+                padding: 15px;
+                margin: 40px 0;
             }
 
-            .gallery-card {
-                aspect-ratio: auto;
+            .uniform-card h2 {
+                font-size: 1.2em;
             }
         }
     </style>
@@ -128,10 +155,9 @@
 
         <div class="header-btn">
 
-           <button class="btn-login" onclick="window.location.href='/ADMIN/login.html'" >Login</button>
+            <button class="btn-login" onclick="window.location.href='/ADMIN/login.html'" >Login</button>
         </div>
     </header>
-    <!-- Navbar -->
     <nav class="navbar">
 
         <ul class="menu">
@@ -166,17 +192,23 @@
         </ul>
     </nav>
 
-    <!-- Gallery Section -->
-    <section class="gallery-section">
-        <div class="heading">
-            <h2>Our School Gallery</h2>
+    <!-- Uniform Section -->
+    <section class="uniform-section">
+        <div class="slideshow">
+            <img src="/images/school1.jpg" class="active">
+            <img src="/images/school2.jpg">
+            <img src="/images/school3.jpg">
+            <img src="/images/pic5.jpg">
         </div>
-        <div class="gallery-container" id="galleryContainer">
-            
+        <div class="overlay"></div>
+
+        <div class="uniform-card">
+            <img src="/images/school-uniform.jpg" alt="School Uniform">
+            <h2>Our School Uniform</h2>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (unchanged) -->
     <footer>
         <div class="row">
             <!-- Contact -->
@@ -258,26 +290,15 @@
         <script src="/public/year.js"></script>
     </footer>
 
-
     <script>
-        // Dynamic gallery load from Cloudinary URLs
-        fetch('/api/gallery')
-            .then(res => res.json())
-            .then(data => {
-                const container = document.getElementById('galleryContainer');
-                container.innerHTML = "";
-                data.forEach(item => {
-                    // item.filename এখন Cloudinary URL
-                    container.innerHTML += `
-                        <div class="gallery-card">
-                          <img src="${item.filename}" alt="${item.title}">
-                        </div>
-                    `;
-                });
-            });
+        const slides = document.querySelectorAll('.slideshow img');
+        let index = 0;
 
-        // Current year in footer
-        document.getElementById('year').textContent = new Date().getFullYear();
+        setInterval(() => {
+            slides[index].classList.remove('active');
+            index = (index + 1) % slides.length;
+            slides[index].classList.add('active');
+        }, 6000);
     </script>
 </body>
 

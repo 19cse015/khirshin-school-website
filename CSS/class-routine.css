@@ -1,0 +1,19 @@
+body { font-family: Arial; background:#f5f5f5; margin:0; padding:20px; }
+.container { max-width:900px; margin:0 auto; background:#fff; padding:20px 30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+h2 { text-align:center; color:#333; margin-bottom:20px; }
+label { font-weight:bold; margin-right:10px; }
+select { padding:5px 10px; margin-bottom:20px; width:150px; }
+.add-btn, .submit-btn, .delete-row-btn { margin-top:15px; padding:5px 10px; border:none; border-radius:5px; cursor:pointer; font-size:14px; }
+.add-btn { background:#28a745; color:#fff; margin-bottom:10px; }
+.add-btn:hover { background:#218838; }
+.submit-btn { background:#007BFF; color:#fff; }
+.submit-btn:hover { background:#0056b3; }
+.delete-row-btn { background:#dc3545; color:#fff; }
+.delete-row-btn:hover { background:#c82333; }
+.routine-section.hidden { display:none; }
+table { width:100%; border-collapse:collapse; margin-top:15px; }
+th, td { border:1px solid #ddd; padding:10px; text-align:center; }
+th { background:#007BFF; color:#fff; }
+.time-cell { display:flex; justify-content:center; align-items:center; }
+.time-input { padding:5px; margin:0 5px; }
+td select { width:100%; padding:5px; }

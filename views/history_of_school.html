@@ -8,23 +8,60 @@
   <link rel="stylesheet" href="/public/update.css">
   <link rel="stylesheet" href="/CSS/history_of_school.css">
   <link rel="stylesheet" href="/CSS/footer.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <!-- FontAwesome for icons -->
   <!-- FontAwesome 6 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     integrity="sha512-yH1oDFak6i0bszq+2Kc1YZFP9N6Zkq7c+JmZL49vZPJuDxRwRyQ4tGpZB3hD6Xc+RA6mQ0N+FZ8FbF69Fdu6TA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+
+      .heading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-style: italic;
+        font-size: 14px;
+        border-right: 8px solid tomato;
+        border-left: 8px solid tomato;
+        background-color: blueviolet;
+        color: aquamarine;
+      }
+    </style>
+
 
 </head>
 
 <body>
+  <div class="top-bar">
+    <span>Education</span>
+    <span>Discipline</span>
+    <span>Character</span>
+  </div>
+  <header class="school-header">
+    <div class="logo">
+      <img src="/images/logo-final.jpg" alt="School Logo">
+    </div>
+
+    <div class="school-info">
+      <h1>KHIRSHIN S.K HIGH SCHOOL</h1>
+      <p>Patnitala, Naogaon, Bangladesh</p>
+      <p>Established: 1943 | School Code: 1234 | EIIN: 123571</p>
+    </div>
+
+    <div class="header-btn">
+
+      <button class="btn-login" onclick="window.location.href='/ADMIN/login.html'" >Login</button>
+    </div>
+  </header>
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">
-      <img src="/images/logo-final.jpg" alt="">
-      <p>Khirshin S.K High School</p>
-    </div>
+
     <ul class="menu">
       <li><a href="index.html">Home</a></li>
       <li class="dropdown">
@@ -48,8 +85,8 @@
       <li class="dropdown">
         <a href="#">Student Affairs ▾</a>
         <ul class="dropdown-content">
-          <li><a href="#">School Uniform</a></li>
-          <li><a href="#">School Timing</a></li>
+          <li><a href="school-uniform.html">School Uniform</a></li>
+          <li><a href="class-routine.html">School Timing</a></li>
           <li><a href="photo-galarry.html">Photo Gallery</a></li>
           <li><a href="#">Awards</a></li>
         </ul>
@@ -59,7 +96,9 @@
 
   <div class="history">
 
-      <h2>History Of Your school</h2>
+    <div class="heading">
+      <h1>History Of Our School</h1>
+    </div>
 
     <div class="dropdown_image first">
       <img src="/images/gate.jpg" alt="" width="350" height="250">
@@ -122,46 +161,67 @@
       <!-- Contact -->
       <div class="col">
         <h3>Contact Us</h3>
-        <ul>
-          <li><a href="">Email: info@gstu.edu</a></li>
-          <li><a href="">Phone: +880 1234-567890</a></li>
-          <li><a href="">Address: Gazipur, Bangladesh</a></li>
+        <ul class="contact-info">
+          <li><i class="fas fa-envelope"></i><span>info@khirshinskhs.edu.bd</span></li>
+          <li><i class="fas fa-phone-alt"></i><span>+880 1234-567890</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Khirshin, Patnitala, Naogaon, Bangladesh</span></li>
         </ul>
-
       </div>
+
 
       <!-- Quick Links -->
-      <div class="col">
+      <div class="col footer-icons">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about.html">About Us</a></li>
-          <li><a href="/courses.html">Courses</a></li>
-          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="principal-message.html"><i class="fa-solid fa-user-tie"></i> Principal's Message</a></li>
+          <li><a href="history_of_school.html"><i class="fa-solid fa-school"></i> About Our School</a></li>
+          <li><a href="Teacher_list.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teacher List</a></li>
+          <li><a href="class-routine.html"><i class="fa-solid fa-clock"></i> Class Routine</a></li>
+          <li><a href="exam_notice.html"><i class="fa-solid fa-file-alt"></i> Exam Notice</a></li>
+          <li><a href="Admission-notice.html"><i class="fa-solid fa-file-import"></i> Admission Notice</a></li>
+          <li><a href="photo-galarry.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
         </ul>
       </div>
+
 
       <!-- Social Media -->
-      <div class="col">
+
+      <div class="col follow-us">
         <h3>Follow Us</h3>
-        <ul>
-          <li><a href="">Facebook</a></li>
-          <li><a href="">Twitter</a></li>
-          <li><a href="">LinkedIn</a></li>
-          <li><a href="">YouTube</a></li>
-
-
-        </ul>
-
+        <div class="social-icons">
+          <a href="#" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+          </a>
+          <a href="#" class="social-icon twitter">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
+          <a href="#" class="social-icon linkedin">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="#" class="social-icon youtube">
+            <i class="fab fa-youtube"></i>
+            <span>YouTube</span>
+          </a>
+        </div>
       </div>
+
+
 
       <!-- About -->
       <div class="col">
-        <h3>About GSTU</h3>
+        <h3>About Us</h3>
         <ul>
-          <li><a href="">GSTU is committed to providing world-class education and research facilities to build the
-              future
-              leaders of tomorrow.</a></li>
+          <li><a href="">Khirshin S.K High School, established in 1943, is a renowned educational institution in
+              Patnitala, Naogaon.
+              We are dedicated to providing quality education that builds knowledge, discipline, and character in every
+              student.
+
+            </a></li>
         </ul>
 
       </div>
@@ -170,8 +230,9 @@
     <hr>
 
     <p>&copy;<span id="year"></span> All Rights Reserved By Md.Arif Hossain</p>
-        <script src="/public/year.js"></script>
+    <script src="/public/year.js"></script>
   </footer>
+
 
 </body>
 
