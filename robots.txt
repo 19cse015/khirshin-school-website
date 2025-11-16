@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin
+Disallow: /ADMIN
+Allow: /
+
+Sitemap: https://khirshin-school.onrender.com/sitemap.xml

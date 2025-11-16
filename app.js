@@ -333,6 +333,15 @@ app.get('/api/teachers', async (req, res) => {
   res.json(teachers);
 });
 
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(__dirname + '/robots.txt');
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(__dirname + '/sitemap.xml');
+});
+
+
 // ---------------- 404 ----------------
 app.use((req, res) => {
   res.status(404).send('<h1>!404 Not Found </h1>');
