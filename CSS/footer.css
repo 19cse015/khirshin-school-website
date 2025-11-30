@@ -265,3 +265,13 @@ footer p {
     flex-basis: 100%;
   }
 }
+
+@media(max-width:1240px)
+{
+  .row{
+    flex-direction: column;
+    align-items:flex-start
+  }
+
+  
+}

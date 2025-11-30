@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <meta name="google-site-verification" content="J9COPueko7tSvI7_ol2rezrlGy2UiojtjqSn40mnhOk" />
-  
+
 
   <title>Khirshin S.K High School</title>
   <link rel="stylesheet" href="/public/update.css">
@@ -15,8 +15,7 @@
   <meta name="title" content="Khirshin S.K High School | Patnitala, Naogaon, Bangladesh">
   <meta name="description"
     content="Khirshin S.K High School (Established 1943) | A top educational institution in Patnitala, Naogaon. Quality education, experienced teachers, modern facilities, and a strong academic foundation.">
-  <meta name="keywords"
-    content="Khirshin S.K High School, Khirshin School,খিরসীন এস. কে. উচ্চ বিদ্যালয়,খিরসিন স্কুল">
+  <meta name="keywords" content="Khirshin S.K High School, Khirshin School,খিরসীন এস. কে. উচ্চ বিদ্যালয়,খিরসিন স্কুল">
 
   <!-- Author -->
   <meta name="author" content="Md. Arif Hossain">
@@ -116,7 +115,7 @@
   <!-- Notice Headline -->
   <div class="notice-headline">
     <span class="text">
-      Latest Notice: Class 9 Exam Routine Published | Admission Open for 2025 | Annual Sports Day Next Week
+      Latest Notice: This website is currently under development. More updates coming soon.
     </span>
   </div>
 
@@ -186,6 +185,41 @@
   </section>
 
 
+  <section class="leaders-section">
+
+    <div class="leader-card">
+      <h3 class="leader-title">সভাপতি</h3>
+      <img src="/images/president.jpg" class="leader-img">
+      <h2 class="leader-name">জনাব মোঃ XYZ</h2>
+      <p class="leader-position">সভাপতি</p>
+      <a href="#" class="leader-btn">সভাপতির বাণী</a>
+
+      <div class="leader-social">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+      </div>
+    </div>
+
+    <div class="leader-card">
+      <h3 class="leader-title">প্রধান শিক্ষক</h3>
+      <img src="/images/head_sir.jpg" class="leader-img">
+      <h2 class="leader-name">এস,এম মোরশেদ আলম</h2>
+      <p class="leader-position">প্রধান শিক্ষক</p>
+      <a href="/principal-message.html" class="leader-btn">প্রধান শিক্ষকের বাণী</a>
+
+      <div class="leader-social">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+      </div>
+    </div>
+
+  </section>
+
+
+
+
   <section class="statistics">
     <h2 class="stat-head">Statistics</h2>
     <p>Our School At a Glance</p>
@@ -221,8 +255,8 @@
       <div class="col">
         <h3>Contact Us</h3>
         <ul class="contact-info">
-          <li><i class="fas fa-envelope"></i><span>info@khirshinskhs.edu.bd</span></li>
-          <li><i class="fas fa-phone-alt"></i><span>+880 1234-567890</span></li>
+          <li><i class="fas fa-envelope"></i><span>khirshin1943@gmail.com</span></li>
+          <li><i class="fas fa-phone-alt"></i><span>+880 1741-069502</span></li>
           <li><i class="fas fa-map-marker-alt"></i><span>Khirshin, Patnitala, Naogaon, Bangladesh</span></li>
         </ul>
       </div>
@@ -348,6 +382,30 @@
     window.addEventListener('scroll', showCards);
     showCards(); // Initial call in case already in view
   </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const leaders = document.querySelectorAll(".leader-card");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  leaders.forEach(card => {
+    observer.observe(card);
+  });
+});
+</script>
+
 
 
 
