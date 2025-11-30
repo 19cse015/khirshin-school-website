@@ -257,6 +257,11 @@
         <ul class="contact-info">
           <li><i class="fas fa-envelope"></i><span>khirshin1943@gmail.com</span></li>
           <li><i class="fas fa-phone-alt"></i><span>+880 1741-069502</span></li>
+          <li>
+            <i class="fas fa-globe"></i>
+            <a href="https://www.kskhs.edu.bd" target="_blank">Official Website: www.kskhs.edu.bd</a>
+          </li>
+
           <li><i class="fas fa-map-marker-alt"></i><span>Khirshin, Patnitala, Naogaon, Bangladesh</span></li>
         </ul>
       </div>
@@ -330,7 +335,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll(".count");
-      const speed = 200; // speed control (lower = faster)
+      const speed = 500; // speed control (lower = faster)
 
       const startCounting = (counter) => {
         const target = +counter.getAttribute("data-target");
@@ -384,27 +389,27 @@
   </script>
 
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const leaders = document.querySelectorAll(".leader-card");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const leaders = document.querySelectorAll(".leader-card");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          observer.unobserve(entry.target);
-        }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+
+      leaders.forEach(card => {
+        observer.observe(card);
       });
-    },
-    { threshold: 0.4 }
-  );
-
-  leaders.forEach(card => {
-    observer.observe(card);
-  });
-});
-</script>
+    });
+  </script>
 
 
 
